@@ -1,2 +1,3 @@
-# cr-md
-Hybrid Collisional-Radiative / Molecular Dynamics
+# Hybrid Collisional-Radiative/Molecular Dynamics
+
+This is a Hybrid Collisional-Radiative/Molecular Dynamics (CR/MD) model that is part of the MOLDSTRUCT toolbox. It can be used to simulate photon-matter interaction for large systems such as protein large macromolecules, protein crystals and liquids. The code is based on a modified version of ([webpage](https://www.gromacs.org/)) version 4.5. With functionality close to the normal GROMACS but with some additional parameters to control ionization. Running the code requires data regarding the charge distribution, free electron temperature/density and optionally electron-ion coupling. The model is developed by the Biophysics group at Uppsala University and has a preprint here: [link to article]([https://arxiv.org/abs/2401.03180].
