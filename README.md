@@ -7,9 +7,10 @@ To run photon-matter interaction calculations, the following files are needed:
 **IONIZATION_DATA** folder located in the same directory as the simulations is run.
 This folder should contain:
 1. a folder called **charge_data** which contains files named **charge_distribution_timestep_x.txt** 
-2. files **debye_shielding_interpolated_x.txt**, **electron_density_x.txt debye_shielding_interpolated_x.txt** and **electron_temperature_x.txt**
-**x** is data for the simulation step **x**.
-3. A file called **lennard_jones_parameters.txt** which contains LJ data for each unique atom type given by GROMACS topology file (.tpr). 
+2. files **debye_shielding_interpolated_x.txt**, **electron_density_x.txt** and **electron_temperature_x.txt**.
+4. A file called **lennard_jones_parameters.txt** which contains LJ data for each unique atom type given by GROMACS topology file (.tpr). 
+
+Note that **x** is data for the simulation step **x**.
 
 For the file, **charge_distribution_timestep_x.txt**, it should correspond to a list with the net-charge for each atom in the system. The order of charge should be set in the same way as how the atoms are listed in the PDB file. Thus, the first value in the file should correspond to the net-charge of the first atom in the PDB for time-step **x**. 
 
