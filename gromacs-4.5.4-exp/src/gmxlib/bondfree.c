@@ -866,7 +866,7 @@ real angles(int nbonds,
         
     }
 
-    ionization_factor = 1.0;
+    //ionization_factor = 1.0;
 
 
     // Hybrid screening potential //
@@ -955,9 +955,12 @@ real angles(int nbonds,
 	f_i[m]=-(cik*r_kj[m]-cii*r_ij[m]);
 	f_k[m]=-(cik*r_ij[m]-ckk*r_kj[m]);
 	f_j[m]=-f_i[m]-f_k[m];
-	f[ai][m]+=f_i[m]*ionization_factor*distance_factor + fij_plasma*r_ik[m];
-	f[aj][m]+=f_j[m]*ionization_factor*distance_factor - fij_plasma*r_ik[m];
-	f[ak][m]+=f_k[m]*ionization_factor*distance_factor;
+	f[ai][m]+=(f_i[m]*ionization_factor*distance_factor + fij_plasma*r_ik[m]);
+	f[aj][m]+=f_j[m]*ionization_factor*distance_factor;
+	f[ak][m]+=(f_k[m]*ionization_factor*distance_factor - fij_plasma*r_ik[m]);
+
+    //f[ai][m]+=fik;
+    //f[ak][m]-=fik;
 
      //fik=(fbond*total_factor+fij_plasma)*r_ik[m];
      // f[ai][m]+=fik;

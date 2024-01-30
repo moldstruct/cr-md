@@ -1,0 +1,12 @@
+libdir=/home/ibrahim/programs/gromacs-4.5.4-hybrid-screening-macromolecules/lib
+includedir=/home/ibrahim/programs/gromacs-4.5.4-hybrid-screening-macromolecules/include
+
+Name: libgmx
+Description: Gromacs default lib
+URL: http://www.gromacs.org
+Version: 4.5.4
+Requires:
+Libs.private: -lm -lpthread
+Libs: -L${libdir} -lgmx
+Cflags: -I${includedir}  -DGMX_SOFTWARE_INVSQRT -DGMX_THREADS
+

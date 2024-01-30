@@ -2610,7 +2610,8 @@ double do_md(FILE *fplog,t_commrec *cr,int nfile,const t_filenm fnm[],
      //printf("PATH TO CHARGE STATES: %s\n", path_to_charge_states);
      
      //sprintf(damage_fle, "/home/ibrahim/projects/hybrid-plasma-md-code/Gromacs4Explosionz/damage_DATA_TEST/outfile_test_%i.txt",ratio);
-     sprintf(damage_fle, "%s/outfile_test_%i.txt",path_to_charge_states, ratio);
+     //sprintf(damage_fle, "%s/outfile_test_%i.txt",path_to_charge_states, ratio); // previous naming scheme
+     sprintf(damage_fle, "%s/charge_distribution_timestep_%i.txt",path_to_charge_states, ratio);
 
     // printf("Path for damage: %s and THE STEP IS : %i and time is: %lf \n", damage_fle, ratio, t ); 
 
