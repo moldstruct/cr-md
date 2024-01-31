@@ -1,0 +1,693 @@
+;
+;	File 'topol_Ion.itp' was generated
+;	By user: ibrahim (28247)
+;	On host: login.davinci
+;	At date: Thu Nov 30 20:07:41 2023
+;
+;	This is a include topology file
+;
+;	It was generated using program:
+;	pdb2gmx - VERSION 4.5.4
+;
+;	Command line was:
+;	/home/ibrahim/programs/gromacs-4.5.4-explosion-METHANE/bin/pdb2gmx -f Lys_1x1x1_295K_nvt_100-400_noVsites.pdb -o 
+;
+;	Force field was read from the standard Gromacs share directory.
+;
+
+[ moleculetype ]
+; Name            nrexcl
+Ion                 3
+
+[ atoms ]
+;   nr       type  resnr residue  atom   cgnr     charge       mass  typeB    chargeB      massB
+; residue 2680 NA  rtp NA   q +1.0
+     1   opls_407   2680     NA     NA      1          1    22.9898   ; qtot 1
+; residue 2681 NA  rtp NA   q +1.0
+     2   opls_407   2681     NA     NA      2          1    22.9898   ; qtot 2
+; residue 2682 NA  rtp NA   q +1.0
+     3   opls_407   2682     NA     NA      3          1    22.9898   ; qtot 3
+; residue 2683 NA  rtp NA   q +1.0
+     4   opls_407   2683     NA     NA      4          1    22.9898   ; qtot 4
+; residue 2684 NA  rtp NA   q +1.0
+     5   opls_407   2684     NA     NA      5          1    22.9898   ; qtot 5
+; residue 2685 NA  rtp NA   q +1.0
+     6   opls_407   2685     NA     NA      6          1    22.9898   ; qtot 6
+; residue 2686 NA  rtp NA   q +1.0
+     7   opls_407   2686     NA     NA      7          1    22.9898   ; qtot 7
+; residue 2687 NA  rtp NA   q +1.0
+     8   opls_407   2687     NA     NA      8          1    22.9898   ; qtot 8
+; residue 2688 NA  rtp NA   q +1.0
+     9   opls_407   2688     NA     NA      9          1    22.9898   ; qtot 9
+; residue 2689 NA  rtp NA   q +1.0
+    10   opls_407   2689     NA     NA     10          1    22.9898   ; qtot 10
+; residue 2690 NA  rtp NA   q +1.0
+    11   opls_407   2690     NA     NA     11          1    22.9898   ; qtot 11
+; residue 2691 NA  rtp NA   q +1.0
+    12   opls_407   2691     NA     NA     12          1    22.9898   ; qtot 12
+; residue 2692 NA  rtp NA   q +1.0
+    13   opls_407   2692     NA     NA     13          1    22.9898   ; qtot 13
+; residue 2693 NA  rtp NA   q +1.0
+    14   opls_407   2693     NA     NA     14          1    22.9898   ; qtot 14
+; residue 2694 NA  rtp NA   q +1.0
+    15   opls_407   2694     NA     NA     15          1    22.9898   ; qtot 15
+; residue 2695 NA  rtp NA   q +1.0
+    16   opls_407   2695     NA     NA     16          1    22.9898   ; qtot 16
+; residue 2696 NA  rtp NA   q +1.0
+    17   opls_407   2696     NA     NA     17          1    22.9898   ; qtot 17
+; residue 2697 NA  rtp NA   q +1.0
+    18   opls_407   2697     NA     NA     18          1    22.9898   ; qtot 18
+; residue 2698 NA  rtp NA   q +1.0
+    19   opls_407   2698     NA     NA     19          1    22.9898   ; qtot 19
+; residue 2699 NA  rtp NA   q +1.0
+    20   opls_407   2699     NA     NA     20          1    22.9898   ; qtot 20
+; residue 2700 NA  rtp NA   q +1.0
+    21   opls_407   2700     NA     NA     21          1    22.9898   ; qtot 21
+; residue 2701 NA  rtp NA   q +1.0
+    22   opls_407   2701     NA     NA     22          1    22.9898   ; qtot 22
+; residue 2702 NA  rtp NA   q +1.0
+    23   opls_407   2702     NA     NA     23          1    22.9898   ; qtot 23
+; residue 2703 NA  rtp NA   q +1.0
+    24   opls_407   2703     NA     NA     24          1    22.9898   ; qtot 24
+; residue 2704 NA  rtp NA   q +1.0
+    25   opls_407   2704     NA     NA     25          1    22.9898   ; qtot 25
+; residue 2705 NA  rtp NA   q +1.0
+    26   opls_407   2705     NA     NA     26          1    22.9898   ; qtot 26
+; residue 2706 NA  rtp NA   q +1.0
+    27   opls_407   2706     NA     NA     27          1    22.9898   ; qtot 27
+; residue 2707 NA  rtp NA   q +1.0
+    28   opls_407   2707     NA     NA     28          1    22.9898   ; qtot 28
+; residue 2708 NA  rtp NA   q +1.0
+    29   opls_407   2708     NA     NA     29          1    22.9898   ; qtot 29
+; residue 2709 NA  rtp NA   q +1.0
+    30   opls_407   2709     NA     NA     30          1    22.9898   ; qtot 30
+; residue 2710 NA  rtp NA   q +1.0
+    31   opls_407   2710     NA     NA     31          1    22.9898   ; qtot 31
+; residue 2711 NA  rtp NA   q +1.0
+    32   opls_407   2711     NA     NA     32          1    22.9898   ; qtot 32
+; residue 2712 NA  rtp NA   q +1.0
+    33   opls_407   2712     NA     NA     33          1    22.9898   ; qtot 33
+; residue 2713 NA  rtp NA   q +1.0
+    34   opls_407   2713     NA     NA     34          1    22.9898   ; qtot 34
+; residue 2714 NA  rtp NA   q +1.0
+    35   opls_407   2714     NA     NA     35          1    22.9898   ; qtot 35
+; residue 2715 NA  rtp NA   q +1.0
+    36   opls_407   2715     NA     NA     36          1    22.9898   ; qtot 36
+; residue 2716 NA  rtp NA   q +1.0
+    37   opls_407   2716     NA     NA     37          1    22.9898   ; qtot 37
+; residue 2717 NA  rtp NA   q +1.0
+    38   opls_407   2717     NA     NA     38          1    22.9898   ; qtot 38
+; residue 2718 NA  rtp NA   q +1.0
+    39   opls_407   2718     NA     NA     39          1    22.9898   ; qtot 39
+; residue 2719 NA  rtp NA   q +1.0
+    40   opls_407   2719     NA     NA     40          1    22.9898   ; qtot 40
+; residue 2720 NA  rtp NA   q +1.0
+    41   opls_407   2720     NA     NA     41          1    22.9898   ; qtot 41
+; residue 2721 NA  rtp NA   q +1.0
+    42   opls_407   2721     NA     NA     42          1    22.9898   ; qtot 42
+; residue 2722 NA  rtp NA   q +1.0
+    43   opls_407   2722     NA     NA     43          1    22.9898   ; qtot 43
+; residue 2723 NA  rtp NA   q +1.0
+    44   opls_407   2723     NA     NA     44          1    22.9898   ; qtot 44
+; residue 2724 NA  rtp NA   q +1.0
+    45   opls_407   2724     NA     NA     45          1    22.9898   ; qtot 45
+; residue 2725 NA  rtp NA   q +1.0
+    46   opls_407   2725     NA     NA     46          1    22.9898   ; qtot 46
+; residue 2726 NA  rtp NA   q +1.0
+    47   opls_407   2726     NA     NA     47          1    22.9898   ; qtot 47
+; residue 2727 NA  rtp NA   q +1.0
+    48   opls_407   2727     NA     NA     48          1    22.9898   ; qtot 48
+; residue 2728 NA  rtp NA   q +1.0
+    49   opls_407   2728     NA     NA     49          1    22.9898   ; qtot 49
+; residue 2729 NA  rtp NA   q +1.0
+    50   opls_407   2729     NA     NA     50          1    22.9898   ; qtot 50
+; residue 2730 NA  rtp NA   q +1.0
+    51   opls_407   2730     NA     NA     51          1    22.9898   ; qtot 51
+; residue 2731 NA  rtp NA   q +1.0
+    52   opls_407   2731     NA     NA     52          1    22.9898   ; qtot 52
+; residue 2732 NA  rtp NA   q +1.0
+    53   opls_407   2732     NA     NA     53          1    22.9898   ; qtot 53
+; residue 2733 NA  rtp NA   q +1.0
+    54   opls_407   2733     NA     NA     54          1    22.9898   ; qtot 54
+; residue 2734 NA  rtp NA   q +1.0
+    55   opls_407   2734     NA     NA     55          1    22.9898   ; qtot 55
+; residue 2735 NA  rtp NA   q +1.0
+    56   opls_407   2735     NA     NA     56          1    22.9898   ; qtot 56
+; residue 2736 NA  rtp NA   q +1.0
+    57   opls_407   2736     NA     NA     57          1    22.9898   ; qtot 57
+; residue 2737 NA  rtp NA   q +1.0
+    58   opls_407   2737     NA     NA     58          1    22.9898   ; qtot 58
+; residue 2738 NA  rtp NA   q +1.0
+    59   opls_407   2738     NA     NA     59          1    22.9898   ; qtot 59
+; residue 2739 NA  rtp NA   q +1.0
+    60   opls_407   2739     NA     NA     60          1    22.9898   ; qtot 60
+; residue 2740 NA  rtp NA   q +1.0
+    61   opls_407   2740     NA     NA     61          1    22.9898   ; qtot 61
+; residue 2741 NA  rtp NA   q +1.0
+    62   opls_407   2741     NA     NA     62          1    22.9898   ; qtot 62
+; residue 2742 NA  rtp NA   q +1.0
+    63   opls_407   2742     NA     NA     63          1    22.9898   ; qtot 63
+; residue 2743 NA  rtp NA   q +1.0
+    64   opls_407   2743     NA     NA     64          1    22.9898   ; qtot 64
+; residue 2744 NA  rtp NA   q +1.0
+    65   opls_407   2744     NA     NA     65          1    22.9898   ; qtot 65
+; residue 2745 NA  rtp NA   q +1.0
+    66   opls_407   2745     NA     NA     66          1    22.9898   ; qtot 66
+; residue 2746 NA  rtp NA   q +1.0
+    67   opls_407   2746     NA     NA     67          1    22.9898   ; qtot 67
+; residue 2747 NA  rtp NA   q +1.0
+    68   opls_407   2747     NA     NA     68          1    22.9898   ; qtot 68
+; residue 2748 NA  rtp NA   q +1.0
+    69   opls_407   2748     NA     NA     69          1    22.9898   ; qtot 69
+; residue 2749 NA  rtp NA   q +1.0
+    70   opls_407   2749     NA     NA     70          1    22.9898   ; qtot 70
+; residue 2750 NA  rtp NA   q +1.0
+    71   opls_407   2750     NA     NA     71          1    22.9898   ; qtot 71
+; residue 2751 NA  rtp NA   q +1.0
+    72   opls_407   2751     NA     NA     72          1    22.9898   ; qtot 72
+; residue 2752 NA  rtp NA   q +1.0
+    73   opls_407   2752     NA     NA     73          1    22.9898   ; qtot 73
+; residue 2753 NA  rtp NA   q +1.0
+    74   opls_407   2753     NA     NA     74          1    22.9898   ; qtot 74
+; residue 2754 NA  rtp NA   q +1.0
+    75   opls_407   2754     NA     NA     75          1    22.9898   ; qtot 75
+; residue 2755 NA  rtp NA   q +1.0
+    76   opls_407   2755     NA     NA     76          1    22.9898   ; qtot 76
+; residue 2756 NA  rtp NA   q +1.0
+    77   opls_407   2756     NA     NA     77          1    22.9898   ; qtot 77
+; residue 2757 NA  rtp NA   q +1.0
+    78   opls_407   2757     NA     NA     78          1    22.9898   ; qtot 78
+; residue 2758 NA  rtp NA   q +1.0
+    79   opls_407   2758     NA     NA     79          1    22.9898   ; qtot 79
+; residue 2759 NA  rtp NA   q +1.0
+    80   opls_407   2759     NA     NA     80          1    22.9898   ; qtot 80
+; residue 2760 NA  rtp NA   q +1.0
+    81   opls_407   2760     NA     NA     81          1    22.9898   ; qtot 81
+; residue 2761 NA  rtp NA   q +1.0
+    82   opls_407   2761     NA     NA     82          1    22.9898   ; qtot 82
+; residue 2762 NA  rtp NA   q +1.0
+    83   opls_407   2762     NA     NA     83          1    22.9898   ; qtot 83
+; residue 2763 NA  rtp NA   q +1.0
+    84   opls_407   2763     NA     NA     84          1    22.9898   ; qtot 84
+; residue 2764 NA  rtp NA   q +1.0
+    85   opls_407   2764     NA     NA     85          1    22.9898   ; qtot 85
+; residue 2765 NA  rtp NA   q +1.0
+    86   opls_407   2765     NA     NA     86          1    22.9898   ; qtot 86
+; residue 2766 NA  rtp NA   q +1.0
+    87   opls_407   2766     NA     NA     87          1    22.9898   ; qtot 87
+; residue 2767 NA  rtp NA   q +1.0
+    88   opls_407   2767     NA     NA     88          1    22.9898   ; qtot 88
+; residue 2768 NA  rtp NA   q +1.0
+    89   opls_407   2768     NA     NA     89          1    22.9898   ; qtot 89
+; residue 2769 NA  rtp NA   q +1.0
+    90   opls_407   2769     NA     NA     90          1    22.9898   ; qtot 90
+; residue 2770 NA  rtp NA   q +1.0
+    91   opls_407   2770     NA     NA     91          1    22.9898   ; qtot 91
+; residue 2771 NA  rtp NA   q +1.0
+    92   opls_407   2771     NA     NA     92          1    22.9898   ; qtot 92
+; residue 2772 NA  rtp NA   q +1.0
+    93   opls_407   2772     NA     NA     93          1    22.9898   ; qtot 93
+; residue 2773 NA  rtp NA   q +1.0
+    94   opls_407   2773     NA     NA     94          1    22.9898   ; qtot 94
+; residue 2774 NA  rtp NA   q +1.0
+    95   opls_407   2774     NA     NA     95          1    22.9898   ; qtot 95
+; residue 2775 NA  rtp NA   q +1.0
+    96   opls_407   2775     NA     NA     96          1    22.9898   ; qtot 96
+; residue 2776 NA  rtp NA   q +1.0
+    97   opls_407   2776     NA     NA     97          1    22.9898   ; qtot 97
+; residue 2777 NA  rtp NA   q +1.0
+    98   opls_407   2777     NA     NA     98          1    22.9898   ; qtot 98
+; residue 2778 NA  rtp NA   q +1.0
+    99   opls_407   2778     NA     NA     99          1    22.9898   ; qtot 99
+; residue 2779 NA  rtp NA   q +1.0
+   100   opls_407   2779     NA     NA    100          1    22.9898   ; qtot 100
+; residue 2780 NA  rtp NA   q +1.0
+   101   opls_407   2780     NA     NA    101          1    22.9898   ; qtot 101
+; residue 2781 NA  rtp NA   q +1.0
+   102   opls_407   2781     NA     NA    102          1    22.9898   ; qtot 102
+; residue 2782 NA  rtp NA   q +1.0
+   103   opls_407   2782     NA     NA    103          1    22.9898   ; qtot 103
+; residue 2783 NA  rtp NA   q +1.0
+   104   opls_407   2783     NA     NA    104          1    22.9898   ; qtot 104
+; residue 2784 NA  rtp NA   q +1.0
+   105   opls_407   2784     NA     NA    105          1    22.9898   ; qtot 105
+; residue 2785 NA  rtp NA   q +1.0
+   106   opls_407   2785     NA     NA    106          1    22.9898   ; qtot 106
+; residue 2786 NA  rtp NA   q +1.0
+   107   opls_407   2786     NA     NA    107          1    22.9898   ; qtot 107
+; residue 2787 NA  rtp NA   q +1.0
+   108   opls_407   2787     NA     NA    108          1    22.9898   ; qtot 108
+; residue 2788 NA  rtp NA   q +1.0
+   109   opls_407   2788     NA     NA    109          1    22.9898   ; qtot 109
+; residue 2789 NA  rtp NA   q +1.0
+   110   opls_407   2789     NA     NA    110          1    22.9898   ; qtot 110
+; residue 2790 NA  rtp NA   q +1.0
+   111   opls_407   2790     NA     NA    111          1    22.9898   ; qtot 111
+; residue 2791 NA  rtp NA   q +1.0
+   112   opls_407   2791     NA     NA    112          1    22.9898   ; qtot 112
+; residue 2792 NA  rtp NA   q +1.0
+   113   opls_407   2792     NA     NA    113          1    22.9898   ; qtot 113
+; residue 2793 NA  rtp NA   q +1.0
+   114   opls_407   2793     NA     NA    114          1    22.9898   ; qtot 114
+; residue 2794 NA  rtp NA   q +1.0
+   115   opls_407   2794     NA     NA    115          1    22.9898   ; qtot 115
+; residue 2795 NA  rtp NA   q +1.0
+   116   opls_407   2795     NA     NA    116          1    22.9898   ; qtot 116
+; residue 2796 NA  rtp NA   q +1.0
+   117   opls_407   2796     NA     NA    117          1    22.9898   ; qtot 117
+; residue 2797 NA  rtp NA   q +1.0
+   118   opls_407   2797     NA     NA    118          1    22.9898   ; qtot 118
+; residue 2798 NA  rtp NA   q +1.0
+   119   opls_407   2798     NA     NA    119          1    22.9898   ; qtot 119
+; residue 2799 NA  rtp NA   q +1.0
+   120   opls_407   2799     NA     NA    120          1    22.9898   ; qtot 120
+; residue 2800 NA  rtp NA   q +1.0
+   121   opls_407   2800     NA     NA    121          1    22.9898   ; qtot 121
+; residue 2801 NA  rtp NA   q +1.0
+   122   opls_407   2801     NA     NA    122          1    22.9898   ; qtot 122
+; residue 2802 NA  rtp NA   q +1.0
+   123   opls_407   2802     NA     NA    123          1    22.9898   ; qtot 123
+; residue 2803 NA  rtp NA   q +1.0
+   124   opls_407   2803     NA     NA    124          1    22.9898   ; qtot 124
+; residue 2804 NA  rtp NA   q +1.0
+   125   opls_407   2804     NA     NA    125          1    22.9898   ; qtot 125
+; residue 2805 NA  rtp NA   q +1.0
+   126   opls_407   2805     NA     NA    126          1    22.9898   ; qtot 126
+; residue 2806 NA  rtp NA   q +1.0
+   127   opls_407   2806     NA     NA    127          1    22.9898   ; qtot 127
+; residue 2807 NA  rtp NA   q +1.0
+   128   opls_407   2807     NA     NA    128          1    22.9898   ; qtot 128
+; residue 2808 NA  rtp NA   q +1.0
+   129   opls_407   2808     NA     NA    129          1    22.9898   ; qtot 129
+; residue 2809 NA  rtp NA   q +1.0
+   130   opls_407   2809     NA     NA    130          1    22.9898   ; qtot 130
+; residue 2810 NA  rtp NA   q +1.0
+   131   opls_407   2810     NA     NA    131          1    22.9898   ; qtot 131
+; residue 2811 NA  rtp NA   q +1.0
+   132   opls_407   2811     NA     NA    132          1    22.9898   ; qtot 132
+; residue 2812 NA  rtp NA   q +1.0
+   133   opls_407   2812     NA     NA    133          1    22.9898   ; qtot 133
+; residue 2813 NA  rtp NA   q +1.0
+   134   opls_407   2813     NA     NA    134          1    22.9898   ; qtot 134
+; residue 2814 CL  rtp CL   q -1.0
+   135   opls_401   2814     CL     CL    135         -1     35.453   ; qtot 133
+; residue 2815 CL  rtp CL   q -1.0
+   136   opls_401   2815     CL     CL    136         -1     35.453   ; qtot 132
+; residue 2816 CL  rtp CL   q -1.0
+   137   opls_401   2816     CL     CL    137         -1     35.453   ; qtot 131
+; residue 2817 CL  rtp CL   q -1.0
+   138   opls_401   2817     CL     CL    138         -1     35.453   ; qtot 130
+; residue 2818 CL  rtp CL   q -1.0
+   139   opls_401   2818     CL     CL    139         -1     35.453   ; qtot 129
+; residue 2819 CL  rtp CL   q -1.0
+   140   opls_401   2819     CL     CL    140         -1     35.453   ; qtot 128
+; residue 2820 CL  rtp CL   q -1.0
+   141   opls_401   2820     CL     CL    141         -1     35.453   ; qtot 127
+; residue 2821 CL  rtp CL   q -1.0
+   142   opls_401   2821     CL     CL    142         -1     35.453   ; qtot 126
+; residue 2822 CL  rtp CL   q -1.0
+   143   opls_401   2822     CL     CL    143         -1     35.453   ; qtot 125
+; residue 2823 CL  rtp CL   q -1.0
+   144   opls_401   2823     CL     CL    144         -1     35.453   ; qtot 124
+; residue 2824 CL  rtp CL   q -1.0
+   145   opls_401   2824     CL     CL    145         -1     35.453   ; qtot 123
+; residue 2825 CL  rtp CL   q -1.0
+   146   opls_401   2825     CL     CL    146         -1     35.453   ; qtot 122
+; residue 2826 CL  rtp CL   q -1.0
+   147   opls_401   2826     CL     CL    147         -1     35.453   ; qtot 121
+; residue 2827 CL  rtp CL   q -1.0
+   148   opls_401   2827     CL     CL    148         -1     35.453   ; qtot 120
+; residue 2828 CL  rtp CL   q -1.0
+   149   opls_401   2828     CL     CL    149         -1     35.453   ; qtot 119
+; residue 2829 CL  rtp CL   q -1.0
+   150   opls_401   2829     CL     CL    150         -1     35.453   ; qtot 118
+; residue 2830 CL  rtp CL   q -1.0
+   151   opls_401   2830     CL     CL    151         -1     35.453   ; qtot 117
+; residue 2831 CL  rtp CL   q -1.0
+   152   opls_401   2831     CL     CL    152         -1     35.453   ; qtot 116
+; residue 2832 CL  rtp CL   q -1.0
+   153   opls_401   2832     CL     CL    153         -1     35.453   ; qtot 115
+; residue 2833 CL  rtp CL   q -1.0
+   154   opls_401   2833     CL     CL    154         -1     35.453   ; qtot 114
+; residue 2834 CL  rtp CL   q -1.0
+   155   opls_401   2834     CL     CL    155         -1     35.453   ; qtot 113
+; residue 2835 CL  rtp CL   q -1.0
+   156   opls_401   2835     CL     CL    156         -1     35.453   ; qtot 112
+; residue 2836 CL  rtp CL   q -1.0
+   157   opls_401   2836     CL     CL    157         -1     35.453   ; qtot 111
+; residue 2837 CL  rtp CL   q -1.0
+   158   opls_401   2837     CL     CL    158         -1     35.453   ; qtot 110
+; residue 2838 CL  rtp CL   q -1.0
+   159   opls_401   2838     CL     CL    159         -1     35.453   ; qtot 109
+; residue 2839 CL  rtp CL   q -1.0
+   160   opls_401   2839     CL     CL    160         -1     35.453   ; qtot 108
+; residue 2840 CL  rtp CL   q -1.0
+   161   opls_401   2840     CL     CL    161         -1     35.453   ; qtot 107
+; residue 2841 CL  rtp CL   q -1.0
+   162   opls_401   2841     CL     CL    162         -1     35.453   ; qtot 106
+; residue 2842 CL  rtp CL   q -1.0
+   163   opls_401   2842     CL     CL    163         -1     35.453   ; qtot 105
+; residue 2843 CL  rtp CL   q -1.0
+   164   opls_401   2843     CL     CL    164         -1     35.453   ; qtot 104
+; residue 2844 CL  rtp CL   q -1.0
+   165   opls_401   2844     CL     CL    165         -1     35.453   ; qtot 103
+; residue 2845 CL  rtp CL   q -1.0
+   166   opls_401   2845     CL     CL    166         -1     35.453   ; qtot 102
+; residue 2846 CL  rtp CL   q -1.0
+   167   opls_401   2846     CL     CL    167         -1     35.453   ; qtot 101
+; residue 2847 CL  rtp CL   q -1.0
+   168   opls_401   2847     CL     CL    168         -1     35.453   ; qtot 100
+; residue 2848 CL  rtp CL   q -1.0
+   169   opls_401   2848     CL     CL    169         -1     35.453   ; qtot 99
+; residue 2849 CL  rtp CL   q -1.0
+   170   opls_401   2849     CL     CL    170         -1     35.453   ; qtot 98
+; residue 2850 CL  rtp CL   q -1.0
+   171   opls_401   2850     CL     CL    171         -1     35.453   ; qtot 97
+; residue 2851 CL  rtp CL   q -1.0
+   172   opls_401   2851     CL     CL    172         -1     35.453   ; qtot 96
+; residue 2852 CL  rtp CL   q -1.0
+   173   opls_401   2852     CL     CL    173         -1     35.453   ; qtot 95
+; residue 2853 CL  rtp CL   q -1.0
+   174   opls_401   2853     CL     CL    174         -1     35.453   ; qtot 94
+; residue 2854 CL  rtp CL   q -1.0
+   175   opls_401   2854     CL     CL    175         -1     35.453   ; qtot 93
+; residue 2855 CL  rtp CL   q -1.0
+   176   opls_401   2855     CL     CL    176         -1     35.453   ; qtot 92
+; residue 2856 CL  rtp CL   q -1.0
+   177   opls_401   2856     CL     CL    177         -1     35.453   ; qtot 91
+; residue 2857 CL  rtp CL   q -1.0
+   178   opls_401   2857     CL     CL    178         -1     35.453   ; qtot 90
+; residue 2858 CL  rtp CL   q -1.0
+   179   opls_401   2858     CL     CL    179         -1     35.453   ; qtot 89
+; residue 2859 CL  rtp CL   q -1.0
+   180   opls_401   2859     CL     CL    180         -1     35.453   ; qtot 88
+; residue 2860 CL  rtp CL   q -1.0
+   181   opls_401   2860     CL     CL    181         -1     35.453   ; qtot 87
+; residue 2861 CL  rtp CL   q -1.0
+   182   opls_401   2861     CL     CL    182         -1     35.453   ; qtot 86
+; residue 2862 CL  rtp CL   q -1.0
+   183   opls_401   2862     CL     CL    183         -1     35.453   ; qtot 85
+; residue 2863 CL  rtp CL   q -1.0
+   184   opls_401   2863     CL     CL    184         -1     35.453   ; qtot 84
+; residue 2864 CL  rtp CL   q -1.0
+   185   opls_401   2864     CL     CL    185         -1     35.453   ; qtot 83
+; residue 2865 CL  rtp CL   q -1.0
+   186   opls_401   2865     CL     CL    186         -1     35.453   ; qtot 82
+; residue 2866 CL  rtp CL   q -1.0
+   187   opls_401   2866     CL     CL    187         -1     35.453   ; qtot 81
+; residue 2867 CL  rtp CL   q -1.0
+   188   opls_401   2867     CL     CL    188         -1     35.453   ; qtot 80
+; residue 2868 CL  rtp CL   q -1.0
+   189   opls_401   2868     CL     CL    189         -1     35.453   ; qtot 79
+; residue 2869 CL  rtp CL   q -1.0
+   190   opls_401   2869     CL     CL    190         -1     35.453   ; qtot 78
+; residue 2870 CL  rtp CL   q -1.0
+   191   opls_401   2870     CL     CL    191         -1     35.453   ; qtot 77
+; residue 2871 CL  rtp CL   q -1.0
+   192   opls_401   2871     CL     CL    192         -1     35.453   ; qtot 76
+; residue 2872 CL  rtp CL   q -1.0
+   193   opls_401   2872     CL     CL    193         -1     35.453   ; qtot 75
+; residue 2873 CL  rtp CL   q -1.0
+   194   opls_401   2873     CL     CL    194         -1     35.453   ; qtot 74
+; residue 2874 CL  rtp CL   q -1.0
+   195   opls_401   2874     CL     CL    195         -1     35.453   ; qtot 73
+; residue 2875 CL  rtp CL   q -1.0
+   196   opls_401   2875     CL     CL    196         -1     35.453   ; qtot 72
+; residue 2876 CL  rtp CL   q -1.0
+   197   opls_401   2876     CL     CL    197         -1     35.453   ; qtot 71
+; residue 2877 CL  rtp CL   q -1.0
+   198   opls_401   2877     CL     CL    198         -1     35.453   ; qtot 70
+; residue 2878 CL  rtp CL   q -1.0
+   199   opls_401   2878     CL     CL    199         -1     35.453   ; qtot 69
+; residue 2879 CL  rtp CL   q -1.0
+   200   opls_401   2879     CL     CL    200         -1     35.453   ; qtot 68
+; residue 2880 CL  rtp CL   q -1.0
+   201   opls_401   2880     CL     CL    201         -1     35.453   ; qtot 67
+; residue 2881 CL  rtp CL   q -1.0
+   202   opls_401   2881     CL     CL    202         -1     35.453   ; qtot 66
+; residue 2882 CL  rtp CL   q -1.0
+   203   opls_401   2882     CL     CL    203         -1     35.453   ; qtot 65
+; residue 2883 CL  rtp CL   q -1.0
+   204   opls_401   2883     CL     CL    204         -1     35.453   ; qtot 64
+; residue 2884 CL  rtp CL   q -1.0
+   205   opls_401   2884     CL     CL    205         -1     35.453   ; qtot 63
+; residue 2885 CL  rtp CL   q -1.0
+   206   opls_401   2885     CL     CL    206         -1     35.453   ; qtot 62
+; residue 2886 CL  rtp CL   q -1.0
+   207   opls_401   2886     CL     CL    207         -1     35.453   ; qtot 61
+; residue 2887 CL  rtp CL   q -1.0
+   208   opls_401   2887     CL     CL    208         -1     35.453   ; qtot 60
+; residue 2888 CL  rtp CL   q -1.0
+   209   opls_401   2888     CL     CL    209         -1     35.453   ; qtot 59
+; residue 2889 CL  rtp CL   q -1.0
+   210   opls_401   2889     CL     CL    210         -1     35.453   ; qtot 58
+; residue 2890 CL  rtp CL   q -1.0
+   211   opls_401   2890     CL     CL    211         -1     35.453   ; qtot 57
+; residue 2891 CL  rtp CL   q -1.0
+   212   opls_401   2891     CL     CL    212         -1     35.453   ; qtot 56
+; residue 2892 CL  rtp CL   q -1.0
+   213   opls_401   2892     CL     CL    213         -1     35.453   ; qtot 55
+; residue 2893 CL  rtp CL   q -1.0
+   214   opls_401   2893     CL     CL    214         -1     35.453   ; qtot 54
+; residue 2894 CL  rtp CL   q -1.0
+   215   opls_401   2894     CL     CL    215         -1     35.453   ; qtot 53
+; residue 2895 CL  rtp CL   q -1.0
+   216   opls_401   2895     CL     CL    216         -1     35.453   ; qtot 52
+; residue 2896 CL  rtp CL   q -1.0
+   217   opls_401   2896     CL     CL    217         -1     35.453   ; qtot 51
+; residue 2897 CL  rtp CL   q -1.0
+   218   opls_401   2897     CL     CL    218         -1     35.453   ; qtot 50
+; residue 2898 CL  rtp CL   q -1.0
+   219   opls_401   2898     CL     CL    219         -1     35.453   ; qtot 49
+; residue 2899 CL  rtp CL   q -1.0
+   220   opls_401   2899     CL     CL    220         -1     35.453   ; qtot 48
+; residue 2900 CL  rtp CL   q -1.0
+   221   opls_401   2900     CL     CL    221         -1     35.453   ; qtot 47
+; residue 2901 CL  rtp CL   q -1.0
+   222   opls_401   2901     CL     CL    222         -1     35.453   ; qtot 46
+; residue 2902 CL  rtp CL   q -1.0
+   223   opls_401   2902     CL     CL    223         -1     35.453   ; qtot 45
+; residue 2903 CL  rtp CL   q -1.0
+   224   opls_401   2903     CL     CL    224         -1     35.453   ; qtot 44
+; residue 2904 CL  rtp CL   q -1.0
+   225   opls_401   2904     CL     CL    225         -1     35.453   ; qtot 43
+; residue 2905 CL  rtp CL   q -1.0
+   226   opls_401   2905     CL     CL    226         -1     35.453   ; qtot 42
+; residue 2906 CL  rtp CL   q -1.0
+   227   opls_401   2906     CL     CL    227         -1     35.453   ; qtot 41
+; residue 2907 CL  rtp CL   q -1.0
+   228   opls_401   2907     CL     CL    228         -1     35.453   ; qtot 40
+; residue 2908 CL  rtp CL   q -1.0
+   229   opls_401   2908     CL     CL    229         -1     35.453   ; qtot 39
+; residue 2909 CL  rtp CL   q -1.0
+   230   opls_401   2909     CL     CL    230         -1     35.453   ; qtot 38
+; residue 2910 CL  rtp CL   q -1.0
+   231   opls_401   2910     CL     CL    231         -1     35.453   ; qtot 37
+; residue 2911 CL  rtp CL   q -1.0
+   232   opls_401   2911     CL     CL    232         -1     35.453   ; qtot 36
+; residue 2912 CL  rtp CL   q -1.0
+   233   opls_401   2912     CL     CL    233         -1     35.453   ; qtot 35
+; residue 2913 CL  rtp CL   q -1.0
+   234   opls_401   2913     CL     CL    234         -1     35.453   ; qtot 34
+; residue 2914 CL  rtp CL   q -1.0
+   235   opls_401   2914     CL     CL    235         -1     35.453   ; qtot 33
+; residue 2915 CL  rtp CL   q -1.0
+   236   opls_401   2915     CL     CL    236         -1     35.453   ; qtot 32
+; residue 2916 CL  rtp CL   q -1.0
+   237   opls_401   2916     CL     CL    237         -1     35.453   ; qtot 31
+; residue 2917 CL  rtp CL   q -1.0
+   238   opls_401   2917     CL     CL    238         -1     35.453   ; qtot 30
+; residue 2918 CL  rtp CL   q -1.0
+   239   opls_401   2918     CL     CL    239         -1     35.453   ; qtot 29
+; residue 2919 CL  rtp CL   q -1.0
+   240   opls_401   2919     CL     CL    240         -1     35.453   ; qtot 28
+; residue 2920 CL  rtp CL   q -1.0
+   241   opls_401   2920     CL     CL    241         -1     35.453   ; qtot 27
+; residue 2921 CL  rtp CL   q -1.0
+   242   opls_401   2921     CL     CL    242         -1     35.453   ; qtot 26
+; residue 2922 CL  rtp CL   q -1.0
+   243   opls_401   2922     CL     CL    243         -1     35.453   ; qtot 25
+; residue 2923 CL  rtp CL   q -1.0
+   244   opls_401   2923     CL     CL    244         -1     35.453   ; qtot 24
+; residue 2924 CL  rtp CL   q -1.0
+   245   opls_401   2924     CL     CL    245         -1     35.453   ; qtot 23
+; residue 2925 CL  rtp CL   q -1.0
+   246   opls_401   2925     CL     CL    246         -1     35.453   ; qtot 22
+; residue 2926 CL  rtp CL   q -1.0
+   247   opls_401   2926     CL     CL    247         -1     35.453   ; qtot 21
+; residue 2927 CL  rtp CL   q -1.0
+   248   opls_401   2927     CL     CL    248         -1     35.453   ; qtot 20
+; residue 2928 CL  rtp CL   q -1.0
+   249   opls_401   2928     CL     CL    249         -1     35.453   ; qtot 19
+; residue 2929 CL  rtp CL   q -1.0
+   250   opls_401   2929     CL     CL    250         -1     35.453   ; qtot 18
+; residue 2930 CL  rtp CL   q -1.0
+   251   opls_401   2930     CL     CL    251         -1     35.453   ; qtot 17
+; residue 2931 CL  rtp CL   q -1.0
+   252   opls_401   2931     CL     CL    252         -1     35.453   ; qtot 16
+; residue 2932 CL  rtp CL   q -1.0
+   253   opls_401   2932     CL     CL    253         -1     35.453   ; qtot 15
+; residue 2933 CL  rtp CL   q -1.0
+   254   opls_401   2933     CL     CL    254         -1     35.453   ; qtot 14
+; residue 2934 CL  rtp CL   q -1.0
+   255   opls_401   2934     CL     CL    255         -1     35.453   ; qtot 13
+; residue 2935 CL  rtp CL   q -1.0
+   256   opls_401   2935     CL     CL    256         -1     35.453   ; qtot 12
+; residue 2936 CL  rtp CL   q -1.0
+   257   opls_401   2936     CL     CL    257         -1     35.453   ; qtot 11
+; residue 2937 CL  rtp CL   q -1.0
+   258   opls_401   2937     CL     CL    258         -1     35.453   ; qtot 10
+; residue 2938 CL  rtp CL   q -1.0
+   259   opls_401   2938     CL     CL    259         -1     35.453   ; qtot 9
+; residue 2939 CL  rtp CL   q -1.0
+   260   opls_401   2939     CL     CL    260         -1     35.453   ; qtot 8
+; residue 2940 CL  rtp CL   q -1.0
+   261   opls_401   2940     CL     CL    261         -1     35.453   ; qtot 7
+; residue 2941 CL  rtp CL   q -1.0
+   262   opls_401   2941     CL     CL    262         -1     35.453   ; qtot 6
+; residue 2942 CL  rtp CL   q -1.0
+   263   opls_401   2942     CL     CL    263         -1     35.453   ; qtot 5
+; residue 2943 CL  rtp CL   q -1.0
+   264   opls_401   2943     CL     CL    264         -1     35.453   ; qtot 4
+; residue 2944 CL  rtp CL   q -1.0
+   265   opls_401   2944     CL     CL    265         -1     35.453   ; qtot 3
+; residue 2945 CL  rtp CL   q -1.0
+   266   opls_401   2945     CL     CL    266         -1     35.453   ; qtot 2
+; residue 2946 CL  rtp CL   q -1.0
+   267   opls_401   2946     CL     CL    267         -1     35.453   ; qtot 1
+; residue 2947 CL  rtp CL   q -1.0
+   268   opls_401   2947     CL     CL    268         -1     35.453   ; qtot 0
+; residue 2948 CL  rtp CL   q -1.0
+   269   opls_401   2948     CL     CL    269         -1     35.453   ; qtot -1
+; residue 2949 CL  rtp CL   q -1.0
+   270   opls_401   2949     CL     CL    270         -1     35.453   ; qtot -2
+; residue 2950 CL  rtp CL   q -1.0
+   271   opls_401   2950     CL     CL    271         -1     35.453   ; qtot -3
+; residue 2951 CL  rtp CL   q -1.0
+   272   opls_401   2951     CL     CL    272         -1     35.453   ; qtot -4
+; residue 2952 CL  rtp CL   q -1.0
+   273   opls_401   2952     CL     CL    273         -1     35.453   ; qtot -5
+; residue 2953 CL  rtp CL   q -1.0
+   274   opls_401   2953     CL     CL    274         -1     35.453   ; qtot -6
+; residue 2954 CL  rtp CL   q -1.0
+   275   opls_401   2954     CL     CL    275         -1     35.453   ; qtot -7
+; residue 2955 CL  rtp CL   q -1.0
+   276   opls_401   2955     CL     CL    276         -1     35.453   ; qtot -8
+; residue 2956 CL  rtp CL   q -1.0
+   277   opls_401   2956     CL     CL    277         -1     35.453   ; qtot -9
+; residue 2957 CL  rtp CL   q -1.0
+   278   opls_401   2957     CL     CL    278         -1     35.453   ; qtot -10
+; residue 2958 CL  rtp CL   q -1.0
+   279   opls_401   2958     CL     CL    279         -1     35.453   ; qtot -11
+; residue 2959 CL  rtp CL   q -1.0
+   280   opls_401   2959     CL     CL    280         -1     35.453   ; qtot -12
+; residue 2960 CL  rtp CL   q -1.0
+   281   opls_401   2960     CL     CL    281         -1     35.453   ; qtot -13
+; residue 2961 CL  rtp CL   q -1.0
+   282   opls_401   2961     CL     CL    282         -1     35.453   ; qtot -14
+; residue 2962 CL  rtp CL   q -1.0
+   283   opls_401   2962     CL     CL    283         -1     35.453   ; qtot -15
+; residue 2963 CL  rtp CL   q -1.0
+   284   opls_401   2963     CL     CL    284         -1     35.453   ; qtot -16
+; residue 2964 CL  rtp CL   q -1.0
+   285   opls_401   2964     CL     CL    285         -1     35.453   ; qtot -17
+; residue 2965 CL  rtp CL   q -1.0
+   286   opls_401   2965     CL     CL    286         -1     35.453   ; qtot -18
+; residue 2966 CL  rtp CL   q -1.0
+   287   opls_401   2966     CL     CL    287         -1     35.453   ; qtot -19
+; residue 2967 CL  rtp CL   q -1.0
+   288   opls_401   2967     CL     CL    288         -1     35.453   ; qtot -20
+; residue 2968 CL  rtp CL   q -1.0
+   289   opls_401   2968     CL     CL    289         -1     35.453   ; qtot -21
+; residue 2969 CL  rtp CL   q -1.0
+   290   opls_401   2969     CL     CL    290         -1     35.453   ; qtot -22
+; residue 2970 CL  rtp CL   q -1.0
+   291   opls_401   2970     CL     CL    291         -1     35.453   ; qtot -23
+; residue 2971 CL  rtp CL   q -1.0
+   292   opls_401   2971     CL     CL    292         -1     35.453   ; qtot -24
+; residue 2972 CL  rtp CL   q -1.0
+   293   opls_401   2972     CL     CL    293         -1     35.453   ; qtot -25
+; residue 2973 CL  rtp CL   q -1.0
+   294   opls_401   2973     CL     CL    294         -1     35.453   ; qtot -26
+; residue 2974 CL  rtp CL   q -1.0
+   295   opls_401   2974     CL     CL    295         -1     35.453   ; qtot -27
+; residue 2975 CL  rtp CL   q -1.0
+   296   opls_401   2975     CL     CL    296         -1     35.453   ; qtot -28
+; residue 2976 CL  rtp CL   q -1.0
+   297   opls_401   2976     CL     CL    297         -1     35.453   ; qtot -29
+; residue 2977 CL  rtp CL   q -1.0
+   298   opls_401   2977     CL     CL    298         -1     35.453   ; qtot -30
+; residue 2978 CL  rtp CL   q -1.0
+   299   opls_401   2978     CL     CL    299         -1     35.453   ; qtot -31
+; residue 2979 CL  rtp CL   q -1.0
+   300   opls_401   2979     CL     CL    300         -1     35.453   ; qtot -32
+; residue 2980 CL  rtp CL   q -1.0
+   301   opls_401   2980     CL     CL    301         -1     35.453   ; qtot -33
+; residue 2981 CL  rtp CL   q -1.0
+   302   opls_401   2981     CL     CL    302         -1     35.453   ; qtot -34
+; residue 2982 CL  rtp CL   q -1.0
+   303   opls_401   2982     CL     CL    303         -1     35.453   ; qtot -35
+; residue 2983 CL  rtp CL   q -1.0
+   304   opls_401   2983     CL     CL    304         -1     35.453   ; qtot -36
+; residue 2984 CL  rtp CL   q -1.0
+   305   opls_401   2984     CL     CL    305         -1     35.453   ; qtot -37
+; residue 2985 CL  rtp CL   q -1.0
+   306   opls_401   2985     CL     CL    306         -1     35.453   ; qtot -38
+; residue 2986 CL  rtp CL   q -1.0
+   307   opls_401   2986     CL     CL    307         -1     35.453   ; qtot -39
+; residue 2987 CL  rtp CL   q -1.0
+   308   opls_401   2987     CL     CL    308         -1     35.453   ; qtot -40
+; residue 2988 CL  rtp CL   q -1.0
+   309   opls_401   2988     CL     CL    309         -1     35.453   ; qtot -41
+; residue 2989 CL  rtp CL   q -1.0
+   310   opls_401   2989     CL     CL    310         -1     35.453   ; qtot -42
+; residue 2990 CL  rtp CL   q -1.0
+   311   opls_401   2990     CL     CL    311         -1     35.453   ; qtot -43
+; residue 2991 CL  rtp CL   q -1.0
+   312   opls_401   2991     CL     CL    312         -1     35.453   ; qtot -44
+; residue 2992 CL  rtp CL   q -1.0
+   313   opls_401   2992     CL     CL    313         -1     35.453   ; qtot -45
+; residue 2993 CL  rtp CL   q -1.0
+   314   opls_401   2993     CL     CL    314         -1     35.453   ; qtot -46
+; residue 2994 CL  rtp CL   q -1.0
+   315   opls_401   2994     CL     CL    315         -1     35.453   ; qtot -47
+; residue 2995 CL  rtp CL   q -1.0
+   316   opls_401   2995     CL     CL    316         -1     35.453   ; qtot -48
+; residue 2996 CL  rtp CL   q -1.0
+   317   opls_401   2996     CL     CL    317         -1     35.453   ; qtot -49
+; residue 2997 CL  rtp CL   q -1.0
+   318   opls_401   2997     CL     CL    318         -1     35.453   ; qtot -50
+; residue 2998 CL  rtp CL   q -1.0
+   319   opls_401   2998     CL     CL    319         -1     35.453   ; qtot -51
+; residue 2999 CL  rtp CL   q -1.0
+   320   opls_401   2999     CL     CL    320         -1     35.453   ; qtot -52
+; residue 3000 CL  rtp CL   q -1.0
+   321   opls_401   3000     CL     CL    321         -1     35.453   ; qtot -53
+; residue 3001 CL  rtp CL   q -1.0
+   322   opls_401   3001     CL     CL    322         -1     35.453   ; qtot -54
+; residue 3002 CL  rtp CL   q -1.0
+   323   opls_401   3002     CL     CL    323         -1     35.453   ; qtot -55
+; residue 3003 CL  rtp CL   q -1.0
+   324   opls_401   3003     CL     CL    324         -1     35.453   ; qtot -56
+; residue 3004 CL  rtp CL   q -1.0
+   325   opls_401   3004     CL     CL    325         -1     35.453   ; qtot -57
+; residue 3005 CL  rtp CL   q -1.0
+   326   opls_401   3005     CL     CL    326         -1     35.453   ; qtot -58
+; residue 3006 CL  rtp CL   q -1.0
+   327   opls_401   3006     CL     CL    327         -1     35.453   ; qtot -59
+; residue 3007 CL  rtp CL   q -1.0
+   328   opls_401   3007     CL     CL    328         -1     35.453   ; qtot -60
+; residue 3008 CL  rtp CL   q -1.0
+   329   opls_401   3008     CL     CL    329         -1     35.453   ; qtot -61
+; residue 3009 CL  rtp CL   q -1.0
+   330   opls_401   3009     CL     CL    330         -1     35.453   ; qtot -62
+; residue 3010 CL  rtp CL   q -1.0
+   331   opls_401   3010     CL     CL    331         -1     35.453   ; qtot -63
+; residue 3011 CL  rtp CL   q -1.0
+   332   opls_401   3011     CL     CL    332         -1     35.453   ; qtot -64
+
+; Include Position restraint file
+#ifdef POSRES
+#include "posre_Ion.itp"
+#endif
+
