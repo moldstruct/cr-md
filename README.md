@@ -1,6 +1,6 @@
 # Hybrid Collisional-Radiative/Molecular Dynamics
 
-This is a Hybrid Collisional-Radiative/Molecular Dynamics (CR/MD) model that is part of the MOLDSTRUCT toolbox. It can be used to simulate photon-matter interaction for large systems such as protein large macromolecules, protein crystals and liquids. The code is based on a modified version of GROMACS version 4.5 ([webpage](https://www.gromacs.org/)). With functionality close to the normal GROMACS but with some additional parameters to control ionization. Running the code requires data regarding the charge distribution, free electron temperature/density and optionally electron-ion coupling. The model is developed by the Biophysics group at Uppsala University and has a preprint here: https://arxiv.org/abs/2401.03180.
+This is a Hybrid Collisional-Radiative/Molecular Dynamics (CR/MD) model that is part of the MOLDSTRUCT toolbox. It can be used to simulate photon-matter interaction for large systems such as large macromolecules, protein crystals and liquids. The code is based on a modified version of GROMACS version 4.5 ([webpage](https://www.gromacs.org/)). With functionality close to the normal GROMACS but with capability of running large-scale photon-matter simulations. Running the code requires data regarding the charge distribution, free electron temperature/density and optionally electron-ion coupling. The model is developed by the Biophysics group at Uppsala University and has a preprint here: https://arxiv.org/abs/2401.03180.
 
 To run photon-matter interaction calculations, the following files are needed:
 
@@ -20,6 +20,5 @@ For 3. each line the has three numbers for the LJ parameters: the atomic number 
 
 This could be needed if one wants to change the values of epsilon and sigma as the atom is ionized. However, this is not always necessary and can be set to zero. In this case, a simple factor scales down the LJ interaction based on the charge of the atom and the atomic number Z.
 
-
-
+In the Example folder, all files above are avaiable required to run a photon-matter calculation of a Lysozyme crystal as done in the preprint. 
 
