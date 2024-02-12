@@ -1165,7 +1165,7 @@ double do_md(FILE *fplog,t_commrec *cr,int nfile,const t_filenm fnm[],
     gmx_repl_ex_t repl_ex=NULL;
     int        nchkpt=1;
 
-    gmx_localtop_t *top;	
+    gmx_localtop_t *top;    
     t_mdebin *mdebin=NULL;
     t_state    *state=NULL;
     rvec       *f_global=NULL;
@@ -1197,14 +1197,14 @@ double do_md(FILE *fplog,t_commrec *cr,int nfile,const t_filenm fnm[],
     t_coupl_rec *tcr=NULL;
     rvec        *xcopy=NULL,*vcopy=NULL,*cbuf=NULL;
     matrix      boxcopy={{0}},lastbox;
-	tensor      tmpvir;
-	real        fom,oldfom,veta_save,pcurr,scalevir,tracevir;
-	real        vetanew = 0;
+    tensor      tmpvir;
+    real        fom,oldfom,veta_save,pcurr,scalevir,tracevir;
+    real        vetanew = 0;
     double      cycles;
-	real        saved_conserved_quantity = 0;
+    real        saved_conserved_quantity = 0;
     real        last_ekin = 0;
-	int         iter_i;
-	t_extmass   MassQ;
+    int         iter_i;
+    t_extmass   MassQ;
     int         **trotter_seq; 
     char        sbuf[STEPSTRSIZE],sbuf2[STEPSTRSIZE];
     int         handled_stop_condition=gmx_stop_cond_none; /* compare to get_stop_condition*/
@@ -1218,16 +1218,7 @@ double do_md(FILE *fplog,t_commrec *cr,int nfile,const t_filenm fnm[],
 #endif
 
 
-   
-    debye_length = 0.1; // Beräkna    
 
-        int wsize = 0;
-        MPI_Comm_size(MPI_COMM_WORLD,&wsize);
-
-
-        if (wsize > 1) {
-            MPI_Bcast(&debye_length,1,MPI_DOUBLE,0,MPI_COMM_WORLD);
-        }   
   
 
 
@@ -1423,68 +1414,11 @@ double do_md(FILE *fplog,t_commrec *cr,int nfile,const t_filenm fnm[],
     }
 
 
-    
-          //  printf("STEPREL: %i\n", step_rel);
-           // mdatoms->chargeA[0]+=0.5;
-            //printf("print charge: %lf\n",mdatoms->chargeA[0]);
-
-          for(i=mdatoms->start; (i<mdatoms->start+mdatoms->homenr); i++) {
-             //   break;
-           //if  (i % 10 =atoms2= 0 || i % 11 == 0) {
-           //     if (mdatoms->typeA[i] == 0) {
-              //      printf("Got oxygen!\n");
-                    mdatoms->chargeA[i] = 2.0;
-             // }
-              //  if (mdatoms->typeA[i] == 1) {
-                //    printf("Got hydrogen!\n");
-               // mdatoms->chargeA[i] = 0.0;
-                //}
-               // }
-               //mdatoms->chargeA[i] = 0.5;
-                //printf("%i",mdatoms->typeA[i] );
-           }
-    //exit(0);
-
-    
-    //printf("START %i, END %i", mdatoms->start, mdatoms->start+mdatoms->homenr);
-    //exit(0);
-
-    update_mdatoms(mdatoms,state->lambda);
-
-    for(i=mdatoms->start; (i<mdatoms->start+mdatoms->homenr); i++) {
-           //if  (i % 10 =atoms2= 0 || i % 11 == 0) {
-                mdatoms->chargeA[i] = 2.0;
-            }
 
 
-   bool READ_DATA = FALSE;
-   debye_length = 0.1; // Beräkna    
-
-
-   static char run_dir[1024]; //= (//char *) malloc (1024);
-   static char run_dir2[1024]; //= (//char *) malloc (1024);
-   
-  //printf("STEP: %i\n", round(t/1e-5));
-   // if (round(t/1e-5)==0) {
-        if (getcwd(run_dir, 1024) != NULL){
-                //fprintf(stdout, "Current working dir: %s\n", run_dir);
-                ;
-        }
-     
-    // strcpy(run_dir2, dirname(run_dir));
-    // strcpy(run_dir, run_dir2);
-     strcat(run_dir, "/IONIZATION_DATA/"); // previously, the 2 lines above were not commented. Now we want to read IONIZATION_DATA which is in the same folder as you are running.
-    
-
-
-   //  wsize = 0;
-   //  MPI_Comm_size(MPI_COMM_WORLD,&wsize);
-
-    // if (wsize > 1) {
-    //    MPI_Bcast(&debye_length,1,MPI_DOUBLE,0,MPI_COMM_WORLD);
-    // }   
-    
-    //}
+    static char run_dir[1024]; 
+    getcwd(run_dir, 1024);
+    strcat(run_dir, "/IONIZATION_DATA/"); 
 
 
     if (MASTER(cr))
@@ -1507,7 +1441,7 @@ double do_md(FILE *fplog,t_commrec *cr,int nfile,const t_filenm fnm[],
         }
         /* Set the initial energy history in state by updating once */
         update_energyhistory(&state_global->enerhist,mdebin);
-    }	
+    }   
 
     if ((state->flags & (1<<estLD_RNG)) && (Flags & MD_READ_RNG)) {
         /* Set the random state if we read a checkpoint file */
@@ -1789,7 +1723,7 @@ double do_md(FILE *fplog,t_commrec *cr,int nfile,const t_filenm fnm[],
     /* and stop now if we should */
     bLastStep = (bRerunMD || (ir->nsteps >= 0 && step_rel > ir->nsteps) ||
                  ((multisim_nsteps >= 0) && (step_rel >= multisim_nsteps )));
-    while (!bLastStep || (bRerunMD && bNotLastFrame)) {
+    while (!bLastStep || (bRerunMD && bNotLastFrame)) { // MD LOOP
 
 
 
@@ -1819,47 +1753,18 @@ double do_md(FILE *fplog,t_commrec *cr,int nfile,const t_filenm fnm[],
 
    /// START OF IONIZATION CODE /// 
 
-  int process_rank, size_Of_Cluster;
-
-    //MPI_Init(&argc, &argv);
-   MPI_Comm_size(MPI_COMM_WORLD, &size_Of_Cluster);
-   MPI_Comm_rank(MPI_COMM_WORLD, &process_rank);
-
-   //printf("Hello from process %i of %d\n", process_rank, size_Of_Cluster);
-
-
-
-
-
-
-  //if (process_rank == 1) {
-  // clock_t start_time, end_time;
-   double cpu_time_used;
-   //start_time = clock();
-  // printf("Starting reading damage data and assigning ionization sequence for time t: %lf\n", t);
-   int j;
-   int atom_index_value;
-   bool do_ionization = FALSE;
-   char counter[10];
-
-   double charges_hydrogen[2];
-   double charges_oxygen[9]; 
+    int process_rank, size_Of_Cluster;
+    int j;
+    int atom_index_value;
+    char counter[10];
   
-   char path_to_damage_data_hydrogen[1024]; //"/home/ibrahim/projects/hybrid-plasma-md-code/IONIZATION_DATA/hydrogen_";
-   char path_to_damage_data_oxygen[1024]; //= "/home/ibrahim/projects/hybrid-plasma-md-code/IONIZATION_DATA/oxygen_";
    char path_to_debye_data[1024]; //= "/home/ibrahim/projects/hybrid-plasma-md-code/IONIZATION_DATA/debye_shielding_interpolated_";
    char path_to_electron_density_data[1024]; //= "/home/ibrahim/projects/hybrid-plasma-md-code/IONIZATION_DATA/debye_shielding_interpolated_";
    char path_to_charge_states[1024]; //= "/home/ibrahim/projects/hybrid-plasma-md-code/IONIZATION_DATA/debye_shielding_interpolated_";
    char simulation_path[1024]; //= "/home/ibrahim/projects/hybrid-plasma-md-code/IONIZATION_DATA/debye_shielding_interpolated_";
    char path_to_electron_temperature_data[1024]; //= "/home/ibrahim/projects/hybrid-plasma-md-code/IONIZATION_DATA/debye_shielding_interpolated_";
   
-  // printf("PATH TO DAMAGE: %s\n",run_dir) ;
 
-  // strcpy(path_to_damage_data_hydrogen, run_dir);
-  // strcat(path_to_damage_data_hydrogen, "hydrogen_");
-
-  // strcpy(path_to_damage_data_oxygen, run_dir);
- //  strcat(path_to_damage_data_oxygen, "oxygen_");
 
    strcpy(path_to_debye_data, run_dir);
    strcat(path_to_debye_data, "debye_shielding_interpolated_");
@@ -1873,27 +1778,10 @@ double do_md(FILE *fplog,t_commrec *cr,int nfile,const t_filenm fnm[],
 
    strcpy(path_to_charge_states, run_dir);
    strcat(path_to_charge_states, "charge_data");
-   //strcat(path_to_charge_states, "damage_DATA_TEST");
 
-   strcpy(simulation_path, run_dir2);
+   strcpy(simulation_path, run_dir);
    strcat(simulation_path, "/simulation");
 
-   //printf("PATH TO DAMAGE: %s\n", damage_path);
-   //printf("%s\n", path_to_damage_data_hydrogen);
-   //printf("%s\n", path_to_damage_data_oxygen);
-   //printf("%s\n", path_to_debye_data);
-  // printf("%s\n", path_to_electron_density_data);
-  // printf("%s\n", path_to_charge_states);
-
-
-  //  int wsize = 0;
-  // MPI_Comm_size(MPI_COMM_WORLD,&wsize);
-
-   // if (wsize > 1) {
-    //    MPI_Bcast(&path_to_damage_data_hydrogen,1,MPI_DOUBLE,0,MPI_COMM_WORLD);
-    //    MPI_Bcast(&path_to_damage_data_oxygen,1,MPI_DOUBLE,0,MPI_COMM_WORLD);
-    //    MPI_Bcast(&path_to_debye_data,1,MPI_DOUBLE,0,MPI_COMM_WORLD);
-   // }   
 
    double get_debye_length(double t)
     {
@@ -2003,260 +1891,14 @@ double do_md(FILE *fplog,t_commrec *cr,int nfile,const t_filenm fnm[],
  
  
 
-   double get_charge_hydrogen(double t)
-    {
+  
 
-        /// Functin to read damage data for hydrogen at a particular time t.  ///
-
-        //t = 1500;
-        int ratio = round(t/1e-5);
-        printf("THE STEP IS : %i and time is: %lf \n", ratio, t);
-        sprintf(counter, "%d", ratio);
-        strcat(path_to_damage_data_hydrogen, counter);
-        strcat(path_to_damage_data_hydrogen, ".txt");
-        printf("Path for hydrogen: %s\n", path_to_damage_data_hydrogen); 
-     
-        FILE *fp = fopen(path_to_damage_data_hydrogen, "r");
-        if (fp == NULL)
-          {
-            printf("Failed to open file hydrogen ionization data for reading.\n");
-            exit(0);
-            return 1;
-          }
-
-          double buff_a;
-          double buff_b;      
-          char line[4096];
-
-          while (fgets(line, STRLEN, fp))
-          {
-            sscanf(line, "%lf %lf ", &buff_a, &buff_b); // i3c
-
-            charges_hydrogen[0] = buff_a;
-            charges_hydrogen[1] = buff_b;
-
-            for (j=0; j <= sizeof(charges_hydrogen)/sizeof(double)-1; j++)   {
-            printf("HYDROGEN ionization distribution: %e \n", charges_hydrogen[j]);   
-            }  
-            fclose(fp);
-            break;
-          }
-            return 0;
-    }
-
-
-    double get_charge_oxygen(double t)
-    {
-
-        /// Functin to read damage data for oxygen at a particular time t.  ///
-
-        //t = 1;
-        int ratio = round(t/1e-5);
-        printf("THE STEP IS : %i and time is: %lf \n", ratio, t);
-        sprintf(counter, "%d", ratio);
-        strcat(path_to_damage_data_oxygen, counter);
-        strcat(path_to_damage_data_oxygen, ".txt");
-        printf("Path for oxygen: %s\n", path_to_damage_data_oxygen); 
-     
-        FILE *fp = fopen(path_to_damage_data_oxygen, "r");
-
-        if (fp == NULL)
-          {
-            printf("Failed to open file oxygen ionization data for reading. \n");
-            exit(0);
-            return 1;
-          }
-
-          double buff_t;
-          double buff_a;
-          double buff_b;
-          double buff_c;
-          double buff_d;
-          double buff_e;
-          double buff_f;
-          double buff_g;
-          double buff_h;
-          double buff_i;
-
-          char line[4096];
-          
-          while (fgets(line, STRLEN, fp))
-          {
-
-            sscanf(line, "%lf %lf %lf %lf %lf %lf %lf %lf %lf", &buff_a, &buff_b, &buff_c, &buff_d, &buff_e, &buff_f, &buff_g, &buff_h, &buff_i); 
-
-            charges_oxygen[0] = buff_a;
-            charges_oxygen[1] = buff_b;
-            charges_oxygen[2] = buff_c;
-            charges_oxygen[3] = buff_d;
-            charges_oxygen[4] = buff_e;
-            charges_oxygen[5] = buff_f;
-            charges_oxygen[6] = buff_g;
-            charges_oxygen[7] = buff_h;
-            charges_oxygen[8] = buff_i;
-
-            for (j=0; j <= sizeof(charges_oxygen)/sizeof(double)-1; j++)   {
-            printf("OXYGEN ionization distribution: %e \n", charges_oxygen[j]);   
-             }  
-            fclose(fp);
-            break;
-
-          }
-            return 0;
-    }
-
-
-
-   double charge_oxygen_processor[9];
-    
-
-
-   // for (j = sizeof(charges_oxygen)/sizeof(double)-1; j >= 0; j--) {
-
-//for(i=mdatoms->start; (i<mdatoms->start+mdatoms->homenr); i++) {
-
-  //       if (charges_oxygen[j] != 0) {
-
-
-       
-   //  charge_oxygen_processor[j] += 1
-   //  charges_oxygen[j]-=1;
-      
-   //     } 
-
-  //  }
-  // }
-
-    
-
-//process_rank
-
-  // get_charge_hydrogen(t);
-  // get_charge_oxygen(t);
-  //printf("hello\n");
   get_debye_length(t);
   get_electron_density(t);
   get_electron_temperature(t);
- // printf("Using debye length: %lf \n",debye_length);
-
-  //    wsize = 0;
-  //  MPI_Comm_size(MPI_COMM_WORLD,&wsize);
 
 
-   // if (wsize > 1) {
-    //        MPI_Bcast(&charges_oxygen,1,MPI_DOUBLE,0,MPI_COMM_WORLD);
-     //       MPI_Bcast(&charges_hydrogen,1,MPI_DOUBLE,0,MPI_COMM_WORLD);
-      //  }   
-   
-       // if ( process_rank==0 ) {
-  for(i=mdatoms->start; (i<mdatoms->start+mdatoms->homenr); i++) {
-    break;
-      //  printf("INDEX OF ATOMS %i\n", i);
-
-        if (mdatoms->typeA[i] == 0) {
-            //printf("Got oxygen!\n");
-                
-        mdatoms->chargeA[i] = 0.000000001;
-        //mdatoms->chargeB[i] = 0.000000001;
-        do_ionization = FALSE;
-
-        for (j = sizeof(charges_oxygen)/sizeof(double)-1; j >= 0; j--) 
-        {
-       // printf("J: %i\n", j);
-      //  if (j==7) {
-
-       // printf("CHARGES J: %lf \n",charges_oxygen[i]);
-       // }        
-
-        if (charges_oxygen[j] != 0) {
-        
-        if (charges_oxygen[j] < 0) {
-        printf("Negative population for oxygen, exiting..\n");
-        exit(0);
-        }
-
-        do_ionization = TRUE;
-       // printf("number of atoms before subtraction: %e with charge: %i \n", charges_oxygen[j], 8-j);
-        charges_oxygen[j]-=1;
-       // printf("number of atoms after subtraction: %e with charge: %i \n", charges_oxygen[j], 8-j);
-        break;
-           }
-        }
-
-      //  printf("charge A before update %f\n", mdatoms->chargeA[i]);
-
-        if (do_ionization == TRUE) {
-            mdatoms->chargeA[i] = 8-j;//(8-j) - floor(mdatoms->chargeA[i]);
-            //mdatoms->chargeB[i] += (8-j) - floor(mdatoms->chargeB[i]);
-
-            if ( process_rank==0 ) {
-            printf("Charge of oxygen after update: %f, indx: %i\n", mdatoms->chargeA[i], i ); 
-            }
-        }
-
-    }
-
-        if (mdatoms->typeA[i] == 1) {
-        mdatoms->chargeA[i] = 0.0000000001;
-       // mdatoms->chargeB[i] = 0.0000000001;
-        
-        do_ionization = FALSE;
-        j = 0;
-        for (j = sizeof(charges_hydrogen)/sizeof(double)-1; j >= 0; j--) 
-        {
-      
-        if (charges_hydrogen[j] != 0) {
-
-            if (charges_hydrogen[j] < 0) {
-            printf("Negative population for hydrogen, exiting..\n");
-            exit(0);
-
-        }
-
-            do_ionization = TRUE;
-           // printf("number of atoms before subtraction: %e with charge: %i \n", charges_hydrogen[j], 1-j);
-            charges_hydrogen[j]-=1;
-           // printf("number of atoms after subtraction: %e with charge: %i \n", charges_hydrogen[j], 1-j);
-            break;
-           }
-        }
-
-       // printf("charge A before update %f\n", mdatoms->chargeA[i]);
-
-        if (do_ionization == TRUE) {
-            
-            mdatoms->chargeA[i] += (1-j) - floor(mdatoms->chargeA[i]);
-           // mdatoms->chargeB[i] += (1-j) - floor(mdatoms->chargeB[i]);
-      
-        }
-        //printf("charge of hydrogen after update: %f\n", mdatoms->chargeA[i]); 
-
-    }
-
-
-   // MPI_Barrier(MPI_COMM_WORLD);
-
-
-    }
-//}
-
-//    }
-
- 
- // end_time = clock();
- // cpu_time_used = ((double) (end_time - start_time)) / CLOCKS_PER_SEC;
-  //printf("Finished ionization sequence for time t: %lf, it took: %lf seconds to compute. \n", t,cpu_time_used); //, it took: %f seconds to compute. \n", t, cpu_time_used);
-
-  //wsize = 0;
-  //  MPI_Comm_size(MPI_COMM_WORLD,&wsize);
-
-
-    //if (wsize > 1) {
-     //       MPI_Bcast(mdatoms->chargeA,1,MPI_DOUBLE,0,MPI_COMM_WORLD);
-      //  }   
-
-
- /// END OF IONIZATION CODE /// 
+ /// MORE CODE FURTHER DOWN /// 
 
         if (ir->efep != efepNO)
         {
@@ -2470,17 +2112,9 @@ double do_md(FILE *fplog,t_commrec *cr,int nfile,const t_filenm fnm[],
         }
         clear_mat(force_vir);
         
+        // MORE IONIZATION CODE
         /* Ionize the atoms if necessary */
 
-   // printf("\n");
-   // printf("STEP: %i\n", step);
-
-   //strcpy(run_dir, dirname(run_dir));
-  // strcat(run_dir, "/IONIZATION_DATA/");
-
-   //printf("PATH TO DAMAGE: %s\n",run_dir);
-
-  //exit(0);
 
 
     char line[4096];
@@ -2488,27 +2122,16 @@ double do_md(FILE *fplog,t_commrec *cr,int nfile,const t_filenm fnm[],
     double reader2; 
     double reader3; 
 
-
-    //double *c12_array = (double*)malloc(2 * sizeof(double));
-    //double *c6_array = (double*)malloc(2 * sizeof(double));
-    //int *ATOM_Z = (int*)malloc(2 * sizeof(int));
-
     epsilon_array = (double*)malloc(40 * sizeof(double));
     sigma_array = (double*)malloc(40 * sizeof(double));
     ATOM_Z = (int*)malloc(40 * sizeof(int));
 
-   char lennard_jones_parameters[1024]; //= "/home/ibrahim/projects/hybrid-plasma-md-code/IONIZATION_DATA/debye_shielding_interpolated_";
-
-    //strcpy(lennard_jones_parameters, simulation_path);
-    //strcat(lennard_jones_parameters, "/lennard_jones_parameters.txt"); // two previous lines, what we had before
+    char lennard_jones_parameters[1024]; 
 
 
     strcpy(lennard_jones_parameters, run_dir);
     strcat(lennard_jones_parameters, "/lennard_jones_parameters.txt"); // two previous lines, what we had before
 
-    //printf("LENNARD JONES: %s \n", lennard_jones_parameters);   
-    
-    //FILE *fp_lj_params = fopen("/home/ibrahim/projects/hybrid-plasma-md-code/Gromacs4Explosionz/simulation/lennard_jones_parameters.txt", "r");
     FILE *fp_lj_params = fopen(lennard_jones_parameters, "r");
 
     if (fp_lj_params == NULL)
@@ -2525,14 +2148,12 @@ double do_md(FILE *fplog,t_commrec *cr,int nfile,const t_filenm fnm[],
         ATOM_Z[i] = reader1;
         sigma_array[i] = reader2; 
         epsilon_array[i] = reader3; 
-
-
-        //printf("c6[i]= %lf,c12[i]= %lf, ATOM_Z[i]= %i \n",c6[i],c12[i],ATOM_Z[i]);
+        
         i+=1;
 
     }
     fclose(fp_lj_params);
-    //exit(0);
+
 
   
     int rank, size, kk;
@@ -2544,53 +2165,30 @@ double do_md(FILE *fplog,t_commrec *cr,int nfile,const t_filenm fnm[],
 
     int NUMBER_OF_ATOMS = 829806;//mdatoms->nr*size;
     double *charge_states = (double*)malloc(NUMBER_OF_ATOMS * sizeof(double)); // allocate memory in heap
-    //int *charge_states = (int*)malloc(NUMBER_OF_ATOMS * sizeof(int)); // allocate memory in heap
-   // char line[4096];
+
     int buff_c; 
     double buff_b; 
     char buffer[350];
-    //sprintf(buffer, "/home/ibrahim/projects/hybrid-plasma-md-code/Gromacs4Explosionz/simulation/dd_home_1_n%i.pdb",rank);
-
-    //strcpy(buffer, simulation_path);
-    //strcat(lennard_jones_parameters, "/lennard_jones_parameters.txt");
 
     if (size > 1) {
 
+        getcwd(simulation_path, 1024);
+        sprintf(buffer, "%s/MPI_slice_n%i.pdb",simulation_path, rank);
 
-    if (getcwd(simulation_path, 1024) != NULL){
-               // fprintf(stdout, "Current simulation path: %s\n", simulation_path);
-                ;
-        }
-
-   // printf("Simulation path: %s\n", simulation_path);
-    sprintf(buffer, "%s/MPI_slice_n%i.pdb",simulation_path, rank);
-
-   // printf("BUFFER: %s \n", buffer);   
-    //sprintf(buffer, "%s/MPI_slice_n%i.pdb",simulation_path, rank);
-    //sprintf(buffer, "%s/MPI_slice_n%i.pdb",run_dir, rank);
-
-
-
-    //printf("BUFFER: %s \n", buffer);   
-    //sprintf(buffer, "/home/ibrahim/projects/hybrid-plasma-md-code/Gromacs4Explosionz/simulation/MPI_slice_n%i.pdb",rank);
-
-    FILE *fp = fopen(buffer, "r");
+        FILE *fp = fopen(buffer, "r");
  
-    if (fp == NULL)
-      {
-        printf("Failed to open file DD PDB file for reading.\n");
-        exit(0);
-        return 1;
-      }
+        if (fp == NULL) {
+            printf("Failed to open file DD PDB file for reading.\n");
+            exit(0);
+            return 1;
+        }
 
 
     i = 0;
     while (fgets(line, sizeof(line), fp)) {
         // read which atoms are in this particular MPI process // 
         sscanf(line, "%i", &buff_c); 
-       // printf("BUFF C: %i from process rank: %i \n",buff_c, rank);
         states[i] = buff_c;
-        //printf("states[i]= %i from rank: %i, index i: %i\n",states[i] , rank,i);
         i+=1;
 
     }
@@ -2599,27 +2197,12 @@ double do_md(FILE *fplog,t_commrec *cr,int nfile,const t_filenm fnm[],
 
     }
 
-    // FILE *fp_damage_data = fopen("/home/ibrahim/projects/hybrid-plasma-md-code/Gromacs4Explosionz/simulation/damage_data_test.txt", "r");
-     char damage_fle[350];
-     int ratio = round(t/1e-5);
-     ratio = (int)round(t/1e-5); // to be able to run with shorter time-step. 
-
-     //printf("THE STEP IS : %i and time is: %lf \n", ratio, t);
-
-     //strcat(path_to_charge_states, "/outfile_test_");
-     //printf("PATH TO CHARGE STATES: %s\n", path_to_charge_states);
-     
-     //sprintf(damage_fle, "/home/ibrahim/projects/hybrid-plasma-md-code/Gromacs4Explosionz/damage_DATA_TEST/outfile_test_%i.txt",ratio);
-     //sprintf(damage_fle, "%s/outfile_test_%i.txt",path_to_charge_states, ratio); // previous naming scheme
-     sprintf(damage_fle, "%s/charge_distribution_timestep_%i.txt",path_to_charge_states, ratio);
-
-    // printf("Path for damage: %s and THE STEP IS : %i and time is: %lf \n", damage_fle, ratio, t ); 
-
-     FILE *fp_damage_data = fopen(damage_fle, "r");
-     //FILE *fp_damage_data = fopen("/home/ibrahim/projects/hybrid-plasma-md-code/Gromacs4Explosionz/simulation/damage_data_test.txt", "r");
-
-    
-                        
+    char damage_fle[350];
+    int ratio = round(t/1e-5);
+    ratio = (int)round(t/1e-5); // to be able to run with shorter time-step. 
+    sprintf(damage_fle, "%s/charge_distribution_timestep_%i.txt",path_to_charge_states, ratio);
+    FILE *fp_damage_data = fopen(damage_fle, "r");
+                   
       if (fp_damage_data == NULL)
       {
         printf("Failed to open file damage file for reading.\n");
@@ -2638,70 +2221,27 @@ double do_md(FILE *fplog,t_commrec *cr,int nfile,const t_filenm fnm[],
     }
 
    i=0;
-  
-
-   // states[i] = 1;
-   // printf("states[i]= %i from rank: %i index: %i\n",states[i] , rank, i);
 
     
 
-   if (size>1) {
+if (size>1) {
 
-   for(i=mdatoms->start; (i<mdatoms->nr); i++) {
-
-       // if (mdatoms->typeA[i] == 0) {
-              // printf("OXYGEN\n");
-       // mdatoms->chargeA[i] = -0.834;
-         //   }
-
-       // else {
-
-        //mdatoms->chargeA[i] = 0.417;
-            
-
-        //}
-    //printf("mdatoms->chargeA[i]= %lf from rank: %i index: %i\n", mdatoms->chargeA[i], rank, i);
-    ///continue;
-            
-    if (charge_states[states[i]-1]>0) {
-    mdatoms->chargeA[i] = charge_states[states[i]-1];
+   for(i=mdatoms->start; (i<mdatoms->nr); i++) {     
+        if (charge_states[states[i]-1]>0) {
+            mdatoms->chargeA[i] = charge_states[states[i]-1];
+        } else {
+            mdatoms->chargeA[i] = 0.0001;
+        }
     }
-    else {
-    mdatoms->chargeA[i] = 0.0001;
-    }
-
-    //mdatoms->chargeA[i] = 0.000;
-
-        //mdatoms->chargeA[i]=1.0;
-    }
-
-
-    }
-
-    else {
-
+} else {
     for(i=mdatoms->start; (i<mdatoms->nr); i++) {
-
-
-    if (charge_states[i]>0){
-        
-        mdatoms->chargeA[i] = charge_states[i];
-        //if( mdatoms->chargeA[i]> 8 ) {
-         //   printf("chargeA[i] = %lf, i = %i\n", mdatoms->chargeA[i], i);
-       // }
+        if (charge_states[i]>0){
+            mdatoms->chargeA[i] = charge_states[i];
+        } else {
+            mdatoms->chargeA[i] = 0.0001;
+        }
     }
-
-    else {
-        mdatoms->chargeA[i] = 0.0001;
-    }
-   // mdatoms->chargeA[i] = 0.000;
-
-    }
-
-    }
-   
-    //printf("mdatoms->chargeA[i]= %lf from rank: %i index: %i\n", mdatoms->chargeA[i], rank, i);
-    //printf("charge_states= %lf from rank: %i index: %i\n",charge_states[i] , rank, i);
+}
 
 
     if (size > 1) {
@@ -2709,247 +2249,12 @@ double do_md(FILE *fplog,t_commrec *cr,int nfile,const t_filenm fnm[],
         MPI_Barrier(MPI_COMM_WORLD);
     }   
 
-
-
-    
-   // if (size>1) {
     free(charge_states); // free memory?
-   
-
-    // printf("Done!\n");
-   // fclose(fp);
-   // }
-
     fclose(fp_damage_data);
-    //exit(0);
 
-   // for(i=mdatoms->start; (i<mdatoms->start+mdatoms->homenr); i++) {
-   
-
-    // for(i=mdatoms->start; (i<mdatoms->nr); i++) {
-     //    mdatoms->chargeA[i] = 2.0;
-
- //   }
+    // END OF IONIZATION CODE
 
 
-
-
-
-    if (4==5) {
-    exit(0);
-
-     for(i=mdatoms->start; (i<mdatoms->start+mdatoms->homenr); i++) {
-            
-
-    mdatoms->chargeA[i] = 1;
-    printf("chargeA[i]= %lf from rank: %i\n, index: %i",mdatoms->chargeA[i] , rank, i);
-
-    }
-
-    }
-
-
-        if (1==3) {
-
-
-    printf("homenr: %i\n", mdatoms->homenr);
-    printf("mdatoms NR: %i\n", mdatoms->nr);
-    //int states[mdatoms->homenr];
-   // exit(0);
-    
-  //  char buffer[350];
-  //  char line[4096];
-  //  int buff_c; 
- //  sprintf(buffer, "/home/ibrahim/projects/hybrid-plasma-md-code/Gromacs4Explosionz/simulation/dd_home_6_n%i.pdb",rank);
-   //FILE *fp = fopen(buffer, "r");
-   //i = 0;
-
-  //while (fgets(line, sizeof(line), fp))
- // {
- //   sscanf(line, "%i", &buff_c); // i3c
-  //  states[i]=buff_c;
-  //  i+=1;
-  //  }
- //   fclose(fp);
-
- // for(i=mdatoms->start; (i<mdatoms->start+mdatoms->homenr); i++) {
- //   printf("states[i]= %i", states[i]);
-
-
-//    }
-
-    
- // exit(0);
-
-    char buffer[350];
-    char damage_fle[350];
-
-
- // for(i=mdatoms->start; (i<mdatoms->start+mdatoms->homenr); i++) {
-//        char path_to_dd_file[300] = "/home/ibrahim/projects/hybrid-plasma-md-code/Gromacs4Explosionz/simulation/dd_home_6_n0.pdb";
-
-
-      // ;; path_to_dd_file = "/home/ibrahim/projects/hybrid-plasma-md-code/Gromacs4Explosionz/simulation/dd_home_6_n0.pdb";
-        sprintf(buffer, "/home/ibrahim/projects/hybrid-plasma-md-code/Gromacs4Explosionz/simulation/dd_home_1_n%i.pdb",rank);
-        FILE *fp = fopen(buffer, "r");
-     //   FILE *fp_damage_data = fopen("/home/ibrahim/projects/hybrid-plasma-md-code/Gromacs4Explosionz/simulation/damage_data_test.txt", "r");
-
-
-        // FILE *fp = fopen("/home/ibrahim/projects/hybrid-plasma-md-code/Gromacs4Explosionz/simulation/dd_home_6_n0.pdb", "r");
-        if (fp == NULL)
-          {
-            printf("Failed to open file DD PDB file for reading.\n");
-            exit(0);
-            return 1;
-          }
-
-     //   if (fp_damage_data == NULL)
-      //    {
-       //     printf("Failed to open file damage file for reading.\n");
-        //    exit(0);
-         //   return 1;
-          //}
-
-    i = 0;
-    char line[4096];
-    char line2[4096];
-   int indx_counter = 0;
-    while (fgets(line, sizeof(line), fp))
-          {
-
-          int buff_a;
-          int buff_b;
-          int buff_c; 
-          int chargevalue;        
-          
-
-          //bool do_ionization = TRUE;
-       
-         
-         sscanf(line, "%i", &buff_c); // i3c
-         sprintf(damage_fle, "/home/ibrahim/projects/hybrid-plasma-md-code/Gromacs4Explosionz/simulation/TEST_DAMAGE_DATA/damage_data_%i.txt",1);
-         FILE *fp_damage_data = fopen(damage_fle, "r");
-
-        // FILE *fp = fopen("/home/ibrahim/projects/hybrid-plasma-md-code/Gromacs4Explosionz/simulation/dd_home_6_n0.pdb", "r");
-        if (fp_damage_data == NULL)
-          {
-            printf("Failed to open file DD PDB file for reading.\n");
-            exit(0);
-            return 1;
-          }
-
-
-         while (fgets(line2, sizeof(line2), fp_damage_data)) {
-                sscanf(line2, "%i", &chargevalue); 
-                mdatoms->chargeA[i] = chargevalue;
-                fclose(fp_damage_data);
-              //printf("Charge of oxygen after update: %f, indx: %i, buffc: %i and rank: %i\n", mdatoms->chargeA[i], i+1,buff_c,rank); 
-                i+=1;
-                break;
-            }
-
-            
-
-           // if (indx_counter == i){
-            //printf("BUFF C: %i from process rank: %i \n",buff_c, rank);
-          //  if ((i+1) == buff_c)  {
-
-         //       while (fgets(line2, sizeof(line2), fp_damage_data)) {
-              
-          //      sscanf(line2, "%i %i", &buff_a, &chargevalue); // i3c
-           //     if (buff_a == buff_c) {
-            //        mdatoms->chargeA[i] = chargevalue;
-             //      printf("Charge of oxygen after update: %f, indx: %i, buffc: %i and rank: %i\n", mdatoms->chargeA[i], i+1,buff_c,rank); 
-                    //do_ionization = FALSE;
-    
-              //      fclose(fp_damage_data);
-               //     i+=1;
-               //     break;
-               // }
-           // }
-        //   FILE *fp_damage_data = fopen("/home/ibrahim/projects/hybrid-plasma-md-code/Gromacs4Explosionz/simulation/damage_data_test.txt", "r");
-                        
-         // if (fp_damage_data == NULL)
-         // {
-         //   printf("Failed to open file damage file for reading.\n");
-         //   exit(0);
-         //   return 1;
-          //}
-          //  }
-
-     //       if (do_ionization== FALSE) {
-
-    //            break;
-    //    }
-    //    else {
-     //    indx_counter+=1; 
-      //      }        
-
-            }
-
-            fclose(fp);
-            //fclose(fp_damage_data);
-
-      //   }
-  // }
-        }
-
-        if (1==2)
-            {
-             printf("GOING INTO IONIZE!!\n");
-               
-       
-
-            for ( kk = 0; kk < size; ++kk ) {
-                if ( rank == kk ) {
-                    // my turn to write to the file
-                    printf("hell from rank %i\n", rank);
-
-         
-                    FILE *fp = fopen("/home/ibrahim/projects/hybrid-plasma-md-code/Gromacs4Explosionz/simulation/dd_home_6_n0.pdb", "r");
-                    if (fp == NULL)
-                      {
-                        printf("Failed to open file DD PDB file for reading.\n");
-                        exit(0);
-                        return 1;
-                      }
-
-                      double buff_a;
-                      double buff_b;
-                      int buff_c;            
-                      char line[4096];
-                   
-                      while (fgets(line, sizeof(line), fp))
-                      {
-                        sscanf(line, "%i", &buff_c); // i3c
-
-                        printf("BUFF C: %i \n",buff_c);
-                        //charges_hydrogen[0] = buff_a;
-                        //charges_hydrogen[1] = buff_b;
-
-                }
-                fclose(fp);
-                MPI_Barrier(MPI_COMM_WORLD);
-            }
-}
-           // exit(0);
-                 int  i,ii,resnr,c;
-                char *atomname,*resname;
-                char *cc;
-              gmx_mtop_atominfo_global(top_global,i,&cc,&resnr,&resname);
-
-            exit(0);
-             printf("Modifying seed on parallel processor to %d\n", cr->nodeid);
-                
-        
-           //  ionize(fbIonizeplog,oenv,mdatoms,top_global,t,ir,state->x,state->v,
-             //      mdatoms->start,mdatoms->start+mdatoms->homenr,state->box,cr);
-            //FILE *fbIonizeplog = fopen("test.txt", "w");
-            //ionize(fplog,oenv,mdatoms,top_global,t,ir,state->x,state->v,
-             //      mdatoms->start,mdatoms->start+mdatoms->homenr,state->box,cr);
-    
-            }
-        
         /* Update force field in ffscan program */
         if (bFFscan)
         {

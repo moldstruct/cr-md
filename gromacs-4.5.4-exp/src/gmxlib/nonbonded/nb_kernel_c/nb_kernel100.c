@@ -48,8 +48,8 @@
  * Calculate forces:        yes
  */
 
-double debye_length;
-double electron_density;
+extern double debye_length;
+extern double electron_density;
 
 
 void nb_kernel100(

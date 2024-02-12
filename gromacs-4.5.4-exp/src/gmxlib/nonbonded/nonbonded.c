@@ -69,7 +69,7 @@
 #include "nb_generic_cg.h"
 
 
-int *ATOM_Z;
+extern int *ATOM_Z;
 
 /* 1,4 interactions uses kernel 330 directly */
 #include "nb_kernel_c/nb_kernel330.h" 

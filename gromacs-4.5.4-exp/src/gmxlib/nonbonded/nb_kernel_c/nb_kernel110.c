@@ -47,8 +47,8 @@
  * water optimization:      No
  * Calculate forces:        yes
  */
-double debye_length;
-double electron_density;
+extern double debye_length;
+extern double electron_density;
 double *epsilon_array;
 double *sigma_array;
 int *ATOM_Z;

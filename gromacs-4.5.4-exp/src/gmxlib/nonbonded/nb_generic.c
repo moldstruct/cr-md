@@ -44,7 +44,7 @@
 #include "nb_generic.h"
 //#include <stdio.h>
 //#include "/home/tomas/programs/gromacs-4.5.4/gromacs-4.5.4/src/kernel/debye.h"
-double debye_length;
+extern double debye_length;
 
 void
 gmx_nb_generic_kernel(t_nblist *           nlist,
