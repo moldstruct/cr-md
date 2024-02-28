@@ -2091,9 +2091,6 @@ loadSimData(&simData,num_steps,num_atoms);
     int process_rank, size_Of_Cluster;
     int j;
     int current_step = step;
-    printf("\n@@@@@@@@@@@@@\n %d \n@@@@@@@@@@\n",current_step);
-
-
 
     debye_length = (double)simData.debye_length[current_step];   
     electron_density = (double)simData.electron_density[current_step];
@@ -2178,10 +2175,6 @@ loadSimData(&simData,num_steps,num_atoms);
 
 
     }
-
-   i=0;
-
-
 
 
 if (size>1) {
