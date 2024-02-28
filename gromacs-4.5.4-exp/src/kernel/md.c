@@ -91,12 +91,7 @@
 #include "sighandler.h"
 #include "string2.h"
 #include <stdbool.h>
- #include <time.h>
-
-
-//#include <stdio.h>
-
-
+#include <time.h>
 
 
 #ifdef GMX_LIB_MPI
@@ -114,10 +109,106 @@
 double debye_length;
 double electron_temperature;
 double electron_density;
+
 double *epsilon_array;
 double *sigma_array;
 int *ATOM_Z;
+/* 
+|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+||||||||                                                             ||||||||
+||||||||            User defined stuff for MOLDSTRUCT                ||||||||
+||||||||                                                             ||||||||
+|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||   
+*/
 
+// Paths to data, asuming IONIZATION_DATA is in folder where sim is run // TODO: maybe make into a mdp parameter?
+
+#define charge_path "IONIZATION_DATA/charges.bin"
+#define electron_density_path "IONIZATION_DATA/electron_density.bin"
+#define electron_temp_path "IONIZATION_DATA/electron_temperature.bin"
+#define debye_data_path "IONIZATION_DATA/debye_data.bin"
+
+typedef struct {
+    unsigned short int** charges; // shape = (num_timesteps,num_atoms)
+    float* electron_density; // shape = (num_timesteps)
+    float* electron_temp; // shape = (num_timesteps)
+    float* debye_length; // shape = (num_timesteps) // TODO: maybe it would be more effcient to define λ^-1 instead? I need to look at how it is used.
+
+} SimulationData;
+
+static void loadSimData(SimulationData* simDataPtr, int num_steps, int num_atoms) {
+    // Temporary variable for use in loops
+    int i;
+
+
+
+    // Allocate memory for charges with num_steps arrays each of size num_atoms
+    simDataPtr->charges = (unsigned short int**)malloc(num_steps * sizeof(unsigned short int*));
+    for (i = 0; i < num_steps; i++) {
+        simDataPtr->charges[i] = (unsigned short int*)malloc(num_atoms * sizeof(unsigned short int));
+    }
+
+    // Allocate memory and read electron_density, electron_temp, and debye_length
+    simDataPtr->debye_length = (float*)malloc(num_steps * sizeof(float));
+    simDataPtr->electron_density = (float*)malloc(num_steps * sizeof(float));
+    simDataPtr->electron_temp = (float*)malloc(num_steps * sizeof(float));
+
+    // Open files and read data
+    FILE *file;
+
+    // Read charges
+    file = fopen(charge_path,"rb");
+    if (!file) {
+        perror("Error opening charge file");
+        exit(1);
+    }
+    for (i = 0; i < num_steps; i++) {
+        fread(simDataPtr->charges[i], sizeof(unsigned short int), num_atoms, file);
+    }
+    fclose(file);
+
+    // Read electron_density
+    file = fopen(electron_density_path,"rb");
+    if (!file) {
+        perror("Error opening electron density file");
+        exit(1);
+    }
+    fread(simDataPtr->electron_density, sizeof(float), num_steps, file);
+    fclose(file);
+
+
+    // Read debye_length
+    file = fopen(debye_data_path,"rb");
+    if (!file) {
+        perror("Error debye length file");
+        exit(1);
+    }
+    fread(simDataPtr->debye_length, sizeof(float), num_steps, file);
+    fclose(file);
+
+
+    // Read electron_temp
+    file = fopen(electron_temp_path,"rb");
+    if (!file) {
+        perror("Error opening electron temperature file");
+        exit(1);
+    }
+    fread(simDataPtr->electron_temp, sizeof(float), num_steps, file);
+    fclose(file);
+
+
+}
+
+
+
+
+
+/* 
+||||||||||||||||||||||||||||||||||||||||||||||||
+||||||||                                ||||||||
+||||||||    end of user defined stuff   ||||||||
+||||||||                                ||||||||
+||||||||||||||||||||||||||||||||||||||||||||||||
 
 /* simulation conditions to transmit. Keep in mind that they are 
    transmitted to other nodes through an MPI_Reduce after
@@ -1218,10 +1309,6 @@ double do_md(FILE *fplog,t_commrec *cr,int nfile,const t_filenm fnm[],
 #endif
 
 
-
-  
-
-
     /* Check for special mdrun options */
     bRerunMD = (Flags & MD_RERUN);
     bIonize  = (Flags & MD_IONIZE);
@@ -1412,13 +1499,6 @@ double do_md(FILE *fplog,t_commrec *cr,int nfile,const t_filenm fnm[],
                             vsite,shellfc,constr,
                             nrnb,wcycle,FALSE);
     }
-
-
-
-
-    static char run_dir[1024]; 
-    getcwd(run_dir, 1024);
-    strcat(run_dir, "/IONIZATION_DATA/"); 
 
 
     if (MASTER(cr))
@@ -1630,6 +1710,45 @@ double do_md(FILE *fplog,t_commrec *cr,int nfile,const t_filenm fnm[],
     if (fplog)
         fprintf(fplog,"\n");
 
+
+
+/*
+|||||||||||||||||||||||||
+||||                 ||||   
+|||| Initializations ||||
+||||                 ||||
+|||||||||||||||||||||||||
+*/
+
+static char run_dir[1024]; 
+getcwd(run_dir, 1024);
+strcat(run_dir, "/IONIZATION_DATA/"); 
+
+
+
+int num_atoms = top_global->natoms;
+int num_steps = ir->nsteps;
+
+SimulationData simData; 
+
+loadSimData(&simData,num_steps,num_atoms);
+
+
+
+/*
+|||||||||||||||||||||||||
+||||                 ||||   
+||||Stuff initialized||||
+||||                 ||||
+|||||||||||||||||||||||||
+*/
+
+
+
+
+
+
+
     /* safest point to do file checkpointing is here.  More general point would be immediately before integrator call */
 #ifdef GMX_FAHCORE
     chkpt_ret=fcCheckPointParallel( cr->nodeid,
@@ -1641,7 +1760,7 @@ double do_md(FILE *fplog,t_commrec *cr,int nfile,const t_filenm fnm[],
     debug_gmx();
     /***********************************************************
      *
-     *             Loop over MD steps 
+     *             Loop over MD steps. main md loop
      *
      ************************************************************/
 
@@ -1723,7 +1842,7 @@ double do_md(FILE *fplog,t_commrec *cr,int nfile,const t_filenm fnm[],
     /* and stop now if we should */
     bLastStep = (bRerunMD || (ir->nsteps >= 0 && step_rel > ir->nsteps) ||
                  ((multisim_nsteps >= 0) && (step_rel >= multisim_nsteps )));
-    while (!bLastStep || (bRerunMD && bNotLastFrame)) { // MD LOOP
+    while (!bLastStep || (bRerunMD && bNotLastFrame)) { // main MD LOOP
 
 
 
@@ -1749,156 +1868,6 @@ double do_md(FILE *fplog,t_commrec *cr,int nfile,const t_filenm fnm[],
             bLastStep = (step_rel == ir->nsteps);
             t = t0 + step*ir->delta_t;
         }
-
-
-   /// START OF IONIZATION CODE /// 
-
-    int process_rank, size_Of_Cluster;
-    int j;
-    int atom_index_value;
-    char counter[10];
-  
-   char path_to_debye_data[1024]; //= "/home/ibrahim/projects/hybrid-plasma-md-code/IONIZATION_DATA/debye_shielding_interpolated_";
-   char path_to_electron_density_data[1024]; //= "/home/ibrahim/projects/hybrid-plasma-md-code/IONIZATION_DATA/debye_shielding_interpolated_";
-   char path_to_charge_states[1024]; //= "/home/ibrahim/projects/hybrid-plasma-md-code/IONIZATION_DATA/debye_shielding_interpolated_";
-   char simulation_path[1024]; //= "/home/ibrahim/projects/hybrid-plasma-md-code/IONIZATION_DATA/debye_shielding_interpolated_";
-   char path_to_electron_temperature_data[1024]; //= "/home/ibrahim/projects/hybrid-plasma-md-code/IONIZATION_DATA/debye_shielding_interpolated_";
-  
-
-
-   strcpy(path_to_debye_data, run_dir);
-   strcat(path_to_debye_data, "debye_shielding_interpolated_");
-
-   strcpy(path_to_electron_density_data, run_dir);
-   strcat(path_to_electron_density_data, "electron_density_");
-
-   strcpy(path_to_electron_temperature_data, run_dir);
-   strcat(path_to_electron_temperature_data, "electron_temperature_");
-
-
-   strcpy(path_to_charge_states, run_dir);
-   strcat(path_to_charge_states, "charge_data");
-
-   strcpy(simulation_path, run_dir);
-   strcat(simulation_path, "/simulation");
-
-
-   double get_debye_length(double t)
-    {
-
-        /// Functin to read debye length data at a particular time t.  ///
-
-        //t = 1500;
-        int ratio = round(t/1e-5);
-        ratio = (int)round(t/1e-5); // to be able to run with shorter time-step. 
-       // printf("THE STEP IS : %i and time is: %lf \n", ratio, t);
-        sprintf(counter, "%d", ratio);
-        strcat(path_to_debye_data, counter);
-        strcat(path_to_debye_data, ".txt");
-       // printf("Path for debye length data: %s\n", path_to_debye_data); 
-     
-        FILE *fp = fopen(path_to_debye_data, "r");
-        if (fp == NULL)
-          {
-            printf("Failed to open file debye length data file for reading.\n");
-            exit(0);
-            return 1;
-          }
-
-          double buff_a;
-          char line[4096];
-
-          while (fgets(line, STRLEN, fp))
-          {
-            sscanf(line, "%lf", &buff_a);
-            debye_length = buff_a;
-            fclose(fp);
-            break;
-          }
-            return 0;
-    }
-
-   double get_electron_density(double t)
-    {
-
-        /// Functin to read debye length data at a particular time t.  ///
-
-        //t = 1500;
-        int ratio = round(t/1e-5);
-        ratio = (int)round(t/1e-5); // to be able to run with shorter time-step. 
-       // printf("THE STEP IS : %i and time is: %lf \n", ratio, t);
-        sprintf(counter, "%d", ratio);
-        strcat(path_to_electron_density_data, counter);
-        strcat(path_to_electron_density_data, ".txt");
-        //printf("Path for electron density data: %s\n", path_to_electron_density_data); 
-     
-        FILE *fp = fopen(path_to_electron_density_data, "r");
-        if (fp == NULL)
-          {
-            printf("Failed to open file electron density data file for reading.\n");
-            exit(0);
-            return 1;
-          }
-
-          double buff_a;
-          char line[4096];
-
-          while (fgets(line, STRLEN, fp))
-          {
-            sscanf(line, "%lf", &buff_a);
-            electron_density = buff_a;
-            fclose(fp);
-            break;
-          }
-            return 0;
-    }
- 
- double get_electron_temperature(double t)
-    {
-
-        /// Functin to read debye length data at a particular time t.  ///
-
-        //t = 1500;
-        int ratio = round(t/1e-5);
-        ratio = (int)round(t/1e-5);
-       // printf("THE STEP IS : %i and time is: %lf \n", ratio, t);
-        sprintf(counter, "%d", ratio);
-        strcat(path_to_electron_temperature_data, counter);
-        strcat(path_to_electron_temperature_data, ".txt");
-        //printf("Path to electron temp data: %s\n", path_to_electron_temperature_data); 
-     
-        FILE *fp = fopen(path_to_electron_temperature_data, "r");
-        if (fp == NULL)
-          {
-            printf("Failed to open file electron temperature data file for reading.\n");
-            exit(0);
-            return 1;
-          }
-
-          double buff_a;
-          char line[4096];
-
-          while (fgets(line, STRLEN, fp))
-          {
-            sscanf(line, "%lf", &buff_a);
-            //electron_temperature = 0.01*11604*buff_a;
-            electron_temperature = buff_a;
-            fclose(fp);
-            break;
-          }
-            return 0;
-    }
- 
- 
-
-  
-
-  get_debye_length(t);
-  get_electron_density(t);
-  get_electron_temperature(t);
-
-
- /// MORE CODE FURTHER DOWN /// 
 
         if (ir->efep != efepNO)
         {
@@ -2112,8 +2081,25 @@ double do_md(FILE *fplog,t_commrec *cr,int nfile,const t_filenm fnm[],
         }
         clear_mat(force_vir);
         
-        // MORE IONIZATION CODE
-        /* Ionize the atoms if necessary */
+//////////////////////////////////////////////
+/////                                    /////   
+/////      START OF IONIZATION CODE      /////
+/////                                    /////
+//////////////////////////////////////////////
+// Functions and structures are defined at the top of this file
+
+    int process_rank, size_Of_Cluster;
+    int j;
+    int current_step = step;
+    printf("\n@@@@@@@@@@@@@\n %d \n@@@@@@@@@@\n",current_step);
+
+
+
+    debye_length = (double)simData.debye_length[current_step];   
+    electron_density = (double)simData.electron_density[current_step];
+    electron_temperature = (double)simData.electron_temp[current_step];
+    /// TODO: since all these defined as double in other files, we must change them to floats everywhere, I will just cast to double for now.
+
 
 
 
@@ -2162,18 +2148,14 @@ double do_md(FILE *fplog,t_commrec *cr,int nfile,const t_filenm fnm[],
 
     
     int *states = (int*)malloc(mdatoms->nr * sizeof(int));
-
-    int NUMBER_OF_ATOMS = 829806;//mdatoms->nr*size;
-    double *charge_states = (double*)malloc(NUMBER_OF_ATOMS * sizeof(double)); // allocate memory in heap
+    unsigned short int* charge_states  = simData.charges[current_step];
 
     int buff_c; 
     double buff_b; 
     char buffer[350];
 
     if (size > 1) {
-
-        getcwd(simulation_path, 1024);
-        sprintf(buffer, "%s/MPI_slice_n%i.pdb",simulation_path, rank);
+        sprintf(buffer, "MPI_slice_n%i.pdb", rank);
 
         FILE *fp = fopen(buffer, "r");
  
@@ -2197,38 +2179,16 @@ double do_md(FILE *fplog,t_commrec *cr,int nfile,const t_filenm fnm[],
 
     }
 
-    char damage_fle[350];
-    int ratio = round(t/1e-5);
-    ratio = (int)round(t/1e-5); // to be able to run with shorter time-step. 
-    sprintf(damage_fle, "%s/charge_distribution_timestep_%i.txt",path_to_charge_states, ratio);
-    FILE *fp_damage_data = fopen(damage_fle, "r");
-                   
-      if (fp_damage_data == NULL)
-      {
-        printf("Failed to open file damage file for reading.\n");
-        exit(0);
-        return 1;
-      }
-        
-     i=0;
-     while (fgets(line, sizeof(line), fp_damage_data)) {
-
-        // read charges for all atoms // 
-        sscanf(line, "%lf", &buff_b); 
-        charge_states[i] = buff_b;
-        i+=1;
-
-    }
-
    i=0;
 
-    
+
+
 
 if (size>1) {
 
    for(i=mdatoms->start; (i<mdatoms->nr); i++) {     
         if (charge_states[states[i]-1]>0) {
-            mdatoms->chargeA[i] = charge_states[states[i]-1];
+            mdatoms->chargeA[i] = (double)charge_states[states[i]-1];
         } else {
             mdatoms->chargeA[i] = 0.0001;
         }
@@ -2236,7 +2196,7 @@ if (size>1) {
 } else {
     for(i=mdatoms->start; (i<mdatoms->nr); i++) {
         if (charge_states[i]>0){
-            mdatoms->chargeA[i] = charge_states[i];
+            mdatoms->chargeA[i] = (double)charge_states[i];
         } else {
             mdatoms->chargeA[i] = 0.0001;
         }
@@ -2249,10 +2209,13 @@ if (size>1) {
         MPI_Barrier(MPI_COMM_WORLD);
     }   
 
-    free(charge_states); // free memory?
-    fclose(fp_damage_data);
 
-    // END OF IONIZATION CODE
+
+//////////////////////////////////////////////
+/////                                    /////   
+/////       END OF IONIZATION CODE       /////
+/////                                    /////
+//////////////////////////////////////////////
 
 
         /* Update force field in ffscan program */
