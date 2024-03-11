@@ -73,7 +73,7 @@ nb_kernel110
                  real          GBtab[],    int *         nthreads, 
                  int *         count,      void *        mtx,
                  int *         outeriter,  int *         inneriter,
-                 real          work[], double lj4_factor);
+                 real          work[]);
 
 
 /*! \brief Nonbonded kernel 110 without forces.

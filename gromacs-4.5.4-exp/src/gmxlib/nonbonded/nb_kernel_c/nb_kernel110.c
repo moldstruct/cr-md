@@ -39,6 +39,7 @@
 #endif
 
 #include "nb_kernel110.h"
+#include "../nb_kerneltype.h"
 
 /*
  * Gromacs nonbonded kernel nb_kernel110
@@ -195,7 +196,7 @@ void nb_kernel110(
                     void *          mtx,
                     int *           outeriter,
                     int *           inneriter,
-                    real *          work, double lj4_factor)
+                    real *          work)
 {
     int           nri,ntype,nthreads;
     real          facel,krf,crf,tabscale,gbtabscale;
@@ -247,6 +248,7 @@ void nb_kernel110(
 
 	double lj_c6_factor;
 	double lj_c12_factor;
+	real lj4_factor = work[3];
 
     /* Reset outer and inner iteration counters */
     nouter           = 0;              
@@ -839,7 +841,7 @@ void nb_kernel110(
 				
 				 // printf("LJ_factor14 = %lf \n", lj4_factor);
 
-				
+				    
 					LJ_factor = lj4_factor;
 				    lj_c6_factor = LJ_factor*LJ_factor*LJ_factor*LJ_factor*LJ_factor*LJ_factor;
 					lj_c12_factor = lj_c6_factor*lj_c6_factor;
