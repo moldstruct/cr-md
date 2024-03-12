@@ -52,6 +52,7 @@ typedef struct
 	real      gb_epsilon_solvent;  /* Epsilon for solvent */
 	real      epsilon_r;           /* Epsilon for inner dielectric */
 	real *    gpol;                /* Polarization energy group */
+	real     lj_param;                /* TEMPORARY FIX FOR LJ PARAMETER */
 } gmx_gbdata_t;
 	
 	
